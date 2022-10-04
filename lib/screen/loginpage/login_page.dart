@@ -4,7 +4,9 @@ import 'package:country_pickers/utils/utils.dart';
 import 'package:ecommerce/common/constant/color_res.dart';
 import 'package:ecommerce/common/constant/image_res.dart';
 import 'package:ecommerce/common/constant/string_res.dart';
+import 'package:ecommerce/common/widget/elevated_button.dart';
 import 'package:ecommerce/common/widget/text_form_field.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -107,27 +109,35 @@ class _LoginPageState extends State<LoginPage> {
                             hintText: StringResources.emailaddres,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10, right: 10),
+                        Container(
+                          margin: const EdgeInsets.only(left: 8),
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               CountryPickerDropdown(
                                 initialValue: 'AR',
                                 itemBuilder: _buildDropdownItem,
-                                priorityList:[
+                                itemFilter: (country) => [
+                                  'AR',
+                                  'DE',
+                                  'GB',
+                                  'CN',
+                                  'US'
+                                ].contains(country.isoCode),
+                                priorityList: [
                                   CountryPickerUtils.getCountryByIsoCode('GB'),
                                   CountryPickerUtils.getCountryByIsoCode('CN'),
                                 ],
-                                sortComparator: (Country a, Country b) => a.isoCode.compareTo(b.isoCode),
+                                sortComparator: (Country a, Country b) =>
+                                    a.isoCode.compareTo(b.isoCode),
                                 onValuePicked: (Country country) {
-                                  print("${country.name}");
+                                  if (kDebugMode) {
+                                    print(country.name);
+                                  }
                                 },
                               ),
-                              const SizedBox(
-                                width: 10,
-                              ),
                               SizedBox(
-                                height: 90,
+                                height: 70,
                                 width: 150,
                                 child: AppTextField(
                                   prefixIcon: Padding(
@@ -173,9 +183,10 @@ class _LoginPageState extends State<LoginPage> {
                             hintText: StringResources.confirmpassword,
                           ),
                         ),
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: const Text("Register"),
+                        const CommonElevatedButton(
+                          buttonColor: ColorResource.green,
+                          text: StringResources.loginpageRegister,
+                          textColor: ColorResource.white,
                         )
                       ],
                     ),
@@ -189,16 +200,13 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-
-  Widget _buildDropdownItem(Country country) => Container(
-    child: Row(
-      children: <Widget>[
-        CountryPickerUtils.getDefaultFlagImage(country),
-        SizedBox(
-          width: 8.0,
-        ),
-        Text("+${country.phoneCode}(${country.isoCode})"),
-      ],
-    ),
-  );
+  Widget _buildDropdownItem(Country country) => Row(
+        children: <Widget>[
+          CountryPickerUtils.getDefaultFlagImage(country),
+          const SizedBox(
+            width: 8.0,
+          ),
+          Text("+${country.phoneCode}(${country.isoCode})"),
+        ],
+      );
 }

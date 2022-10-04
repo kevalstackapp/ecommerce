@@ -14,7 +14,7 @@ class AppTextField extends StatelessWidget {
       this.textInputType,
       this.prefixIcon,
       this.textEditingController,
-      this.hintText, this.border
+      this.hintText, this.border,  int? width
      });
 
   @override
