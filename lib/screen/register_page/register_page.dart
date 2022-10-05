@@ -3,24 +3,25 @@ import 'package:country_pickers/country_pickers.dart';
 import 'package:ecommerce/common/constant/color_res.dart';
 import 'package:ecommerce/common/constant/image_res.dart';
 import 'package:ecommerce/common/constant/string_res.dart';
+import 'package:ecommerce/common/widget/app_button.dart';
 import 'package:ecommerce/common/widget/elevated_button.dart';
-import 'package:ecommerce/common/widget/text_form_field.dart';
-import 'package:ecommerce/screen/loginpage/login_page_view_model.dart';
+import 'package:ecommerce/screen/login_page/login_page.dart';
+import 'package:ecommerce/screen/register_page/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   Country _selectedDialogCountry =
       CountryPickerUtils.getCountryByPhoneCode('91');
+  final formGlobalKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,8 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-    return Scaffold(
+    return
+      Scaffold(
       backgroundColor: ColorResource.green,
       body: Column(children: [
         const SizedBox(
@@ -52,9 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                   fontWeight: FontWeight.w500,
                   color: ColorResource.white)),
         ),
-        const SizedBox(
-          height: 15,
-        ),
+        sizeMaring(),
         Expanded(
           child: Container(
               decoration: const BoxDecoration(
@@ -63,38 +63,14 @@ class _LoginPageState extends State<LoginPage> {
                     topLeft: Radius.circular(30),
                     topRight: Radius.circular(30),
                   )),
-              child: SingleChildScrollView(
-                child: Column(
+              child: Form(
+                key: formGlobalKey,
+                child: ListView(
                   children: [
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    AppTextField(
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SvgPicture.asset(
-                          height: 10,
-                          ImageResources.youricon,
-                        ),
-                      ),
-                      hintText: StringResources.yourname,
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    AppTextField(
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SvgPicture.asset(
-                          height: 10,
-                          ImageResources.emailicon,
-                        ),
-                      ),
-                      hintText: StringResources.emailaddres,
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
+                    nameTextFiled(),
+                    sizeMaring(),
+                    emailTextFiled(),
+                    sizeMaring(),
                     Padding(
                       padding: const EdgeInsets.only(
                         left: 25,
@@ -103,6 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           Expanded(
                             child: Container(
+                              alignment: Alignment.center,
                               height: 45,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
@@ -119,86 +96,49 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           Expanded(
+                            flex: 2,
                             child: SizedBox(
-                              height: 45,
-                              child: AppTextField(
-                                prefixIcon: Padding(
-                                  padding: const EdgeInsets.all(15),
-                                  child: SvgPicture.asset(
-                                      ImageResources.phoneicon),
-                                ),
-                                hintText: StringResources.phonenumber,
-                              ),
+                              child: phonenumaberTextfFlied(),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    AppTextField(
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: Container(
-                            color: ColorResource.green.withOpacity(0.1),
-                            child: SvgPicture.asset(
-                              ImageResources.passwordicon,
-                            )),
-                      ),
-                      hintText: StringResources.password,
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    AppTextField(
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: SvgPicture.asset(
-                          height: 10,
-                          ImageResources.confmpasswordicon,
-                        ),
-                      ),
-                      hintText: StringResources.confirmpassword,
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
+                    sizeMaring(),
+                    passwordTextfFlied(),
+                    sizeMaring(),
+                    confmPasswordTextfFlied(),
+                    sizeMaring(),
                     CommonElevatedButton(
                       onPressed: () {
-                        return initState();
+                        submit();
+                        setState(() {});
                       },
                       buttonColor: ColorResource.green,
                       text: StringResources.resisterbutton,
                       textColor: ColorResource.white,
                     ),
-                    const SizedBox(
-                      height: 15,
-                    ),
+                    sizeMaring(),
                     Padding(
-                      padding: const EdgeInsets.only(left: 30, right: 30),
-                      child: Row(
-                        children: const [
-                          SizedBox(
-                            width: 145,
-                            child: Divider(
-                              color: Colors.black,
-                            ),
-                          ),
-                          Text(StringResources.Or),
-                          SizedBox(
-                            width: 139,
-                            child: Divider(
-                              color: Colors.black,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                        padding: const EdgeInsets.only(left: 30, right: 30),
+                        child: divderrow()),
+                    sizeMaring(),
                     AppButton(
-                      buttonColor: ColorResource.fackbookcolor,
+                      buttonColor: ColorResource.blue,
                       buttonIcon: ImageResources.fackbookicon,
-                    )
+                      text: StringResources.Facebookname,
+                    ),
+                    sizeMaring(),
+                    AppButton(
+                      buttonColor: ColorResource.black,
+                      buttonIcon: ImageResources.appleicon,
+                      text: StringResources.applename,
+                    ),
+                    sizeMaring(),
+                    privacyText(context,
+                        """  By Clicking on “Register with Facebook” or “Register” you Agree
+        To the Lookprior Terms of Service and Privacy Policy"""),
+                    sizeMaring(),
                   ],
                 ),
               )),
@@ -238,4 +178,14 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       );
+
+  void submit() {
+    final isValid = formGlobalKey.currentState?.validate();
+    if (!isValid!) {
+    isValid != null ? Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return   const LoginPage();
+      },)): const Text("");
+    }
+    formGlobalKey.currentState?.save();
+  }
 }

@@ -44,7 +44,7 @@ class CommonElevatedButton extends StatelessWidget {
           text!,
           style:  GoogleFonts.poppins(
               textStyle: const TextStyle(
-                  fontSize: 26,
+                  fontSize: 16,
                   fontWeight: FontWeight.w500,
                   color: ColorResource.white)),
         ),

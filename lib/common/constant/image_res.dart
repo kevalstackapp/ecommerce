@@ -9,6 +9,7 @@ class ImageResources {
   static const phoneicon = images + 'Call.svg';
   static const passwordicon = images + 'Lock.svg';
   static const confmpasswordicon = images + 'Lock.svg';
-  static const fackbookicon = images + 'fackbook.svg';
+  static const fackbookicon = images + 'Group.svg';
+  static const appleicon = images +'apple.svg';
 
 }
