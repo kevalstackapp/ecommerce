@@ -1,4 +1,6 @@
+import 'package:ecommerce/common/constant/color_res.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CommonElevatedButton extends StatelessWidget {
   final String? text;
@@ -30,14 +32,6 @@ class CommonElevatedButton extends StatelessWidget {
       height: 44,
       child: ElevatedButton(
         onPressed: onPressed,
-        child: Text(
-          text!.toUpperCase(),
-          style: TextStyle(
-            fontSize: textSize,
-            color: textColor,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(buttonColor),
           shape: MaterialStateProperty.all(
@@ -45,6 +39,14 @@ class CommonElevatedButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(borderRadius!),
             ),
           ),
+        ),
+        child: Text(
+          text!,
+          style:  GoogleFonts.poppins(
+              textStyle: const TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w500,
+                  color: ColorResource.white)),
         ),
       ),
     );
