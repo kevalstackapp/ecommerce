@@ -79,7 +79,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         children: [
                           Expanded(
                             child: Container(
-                              alignment: Alignment.center,
+                            //  alignment: Alignment.center,
                               height: 45,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
@@ -153,7 +153,11 @@ class _RegisterPageState extends State<RegisterPage> {
           Flexible(
               child: Text(
             "(${country.name})+${country.phoneCode}",
-            overflow: TextOverflow.ellipsis,
+            overflow: TextOverflow.ellipsis,style: GoogleFonts.poppins(
+                  textStyle: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                  )),
           )),
         ],
       );
@@ -182,7 +186,7 @@ class _RegisterPageState extends State<RegisterPage> {
   void submit() {
     final isValid = formGlobalKey.currentState?.validate();
     if (!isValid!) {
-    isValid != null ? Navigator.push(context, MaterialPageRoute(builder: (context) {
+    isValid == null ? Navigator.push(context, MaterialPageRoute(builder: (context) {
       return   const LoginPage();
       },)): const Text("");
     }

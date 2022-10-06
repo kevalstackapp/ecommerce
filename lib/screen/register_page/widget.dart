@@ -38,7 +38,7 @@ Widget divderrow() {
 Widget confmPasswordTextfFlied() {
   return AppTextField(   validator: (value) {
     if (value!.isEmpty) {
-      return 'Enter a valid password!';
+      return 'Please enter Confirm Password.';
     }
     return null;
   },
@@ -65,7 +65,7 @@ Widget confmPasswordTextfFlied() {
 Widget passwordTextfFlied() {
   return AppTextField(  validator: (value) {
     if (value!.isEmpty) {
-      return 'Enter a valid password!';
+      return 'Please enter Password.';
     }
     return null;
   },
@@ -92,7 +92,7 @@ Widget passwordTextfFlied() {
 Widget phonenumaberTextfFlied() {
   return AppTextField(  validator: (value) {
     if (value!.isEmpty) {
-      return 'Enter a valid phoneNumber';
+      return 'Please enter PhoneNumber';
     }
     return null;
   },
@@ -122,7 +122,7 @@ Widget emailTextFiled() {
       if (value!.isEmpty ||
           !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
               .hasMatch(value)) {
-        return 'Enter a valid email!';
+        return 'Please enter your email addresss.';
       }
       return null;
     },
@@ -141,7 +141,7 @@ Widget nameTextFiled() {
   return AppTextField(
     validator: (value) {
       if (value!.isEmpty) {
-        return 'Enter a valid Name';
+        return 'Please enter user name.';
       }
       return null;
     },

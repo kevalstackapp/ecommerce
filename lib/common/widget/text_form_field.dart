@@ -40,7 +40,7 @@ class AppTextField extends StatelessWidget {
             contentPadding: const EdgeInsets.only(top: 5),
             hintText: hintText,
             prefixIcon: prefixIcon,
-            helperStyle: GoogleFonts.poppins(
+            hintStyle: GoogleFonts.poppins(
                 textStyle: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w400,

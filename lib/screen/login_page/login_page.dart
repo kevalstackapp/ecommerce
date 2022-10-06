@@ -3,6 +3,8 @@ import 'package:ecommerce/common/constant/image_res.dart';
 import 'package:ecommerce/common/constant/string_res.dart';
 import 'package:ecommerce/common/widget/app_button.dart';
 import 'package:ecommerce/common/widget/elevated_button.dart';
+import 'package:ecommerce/screen/forgot_password/forgot_password.dart';
+import 'package:ecommerce/screen/register_page/register_page.dart';
 import 'package:ecommerce/screen/register_page/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -75,7 +77,12 @@ class _LoginPageState extends State<LoginPage> {
                     Padding(
                       padding: const EdgeInsets.only(left: 180),
                       child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+
+                            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                              return const Forgotpassword();
+                            },));
+                          },
                           child: Text(
                             StringResources.forgotpassword,
                             style: GoogleFonts.poppins(
@@ -117,7 +124,11 @@ class _LoginPageState extends State<LoginPage> {
                         privacyText(
                             context, """Didn’t have an account?"""),
                         TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                return const RegisterPage();
+                              },));
+                            },
                             child: Text(
                               StringResources.registerpage,
                               style: GoogleFonts.poppins(

@@ -15,4 +15,5 @@ class StringResources {
   static const String logintitlesecondname = "Login to get going";
   static const String forgotpassword = "Forgot password?";
   static const String registerpage = "Register";
+  static const String forgotpasswordtitle = "FORGOT PASSWORD";
 }
