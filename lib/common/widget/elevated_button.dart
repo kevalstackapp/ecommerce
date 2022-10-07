@@ -12,6 +12,7 @@ class CommonElevatedButton extends StatelessWidget {
   final double? textSize;
   final double? borderRadius;
 
+
   const CommonElevatedButton({
     Key? key,
     this.text,

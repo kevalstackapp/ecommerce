@@ -13,7 +13,7 @@ class AppTextField extends StatelessWidget {
   ValueChanged<String>? onFieldSubmitted;
   bool obscureText = false;
 
-   AppTextField(
+  AppTextField(
       {super.key,
       this.lable,
       this.textInputType,
@@ -23,20 +23,24 @@ class AppTextField extends StatelessWidget {
       this.border,
       int? width,
       this.validator,
-      this.onFieldSubmitted
-      });
+      this.onFieldSubmitted});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       child: Padding(
         padding: const EdgeInsets.only(left: 25, right: 25),
-        child: TextFormField(onFieldSubmitted: onFieldSubmitted,
+        child: TextFormField(
+          onFieldSubmitted: onFieldSubmitted,
           keyboardType: textInputType,
           controller: textEditingController,
-          validator: validator,obscureText: obscureText,
-
+          validator: validator,
+          obscureText: obscureText,
           decoration: InputDecoration(
+            focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: ColorResource.green),
+              borderRadius: BorderRadius.circular(10)
+            ),
             contentPadding: const EdgeInsets.only(top: 5),
             hintText: hintText,
             prefixIcon: prefixIcon,

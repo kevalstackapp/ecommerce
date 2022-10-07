@@ -6,4 +6,5 @@ class ColorResource {
   static const Color grey = Colors.grey;
   static const Color blue = Color(0xff546DFD);
   static const Color black = Colors.black;
+  static const Color darkgreen = Color(0xff19C060);
 }

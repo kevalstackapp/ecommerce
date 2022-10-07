@@ -57,14 +57,14 @@ class AppButton extends StatelessWidget {
                     buttonIcon!,
                     fit: BoxFit.fill,
                   )),
-              Text(
+              (text == null)? Text(""):Text(
                 text!,
                 style: GoogleFonts.poppins(
                     textStyle: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                         color: ColorResource.white)),
-              ),
+              )
             ],
           ),
         ),
