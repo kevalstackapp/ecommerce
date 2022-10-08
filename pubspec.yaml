@@ -39,6 +39,8 @@ dependencies:
   flutter_svg: 1.1.5
   google_fonts: 3.0.1
   country_pickers: ^2.0.0
+  animated_bottom_navigation_bar: 1.1.0
+  google_maps_flutter: 2.2.1
 
 
 dev_dependencies:
@@ -71,6 +73,8 @@ flutter:
     - asset/login_page_logo/
     - asset/home_page_image/
     - asset/home_page_image/drawer_image/
+    - asset/home_page_image/floating_icon/
+    - asset/home_page_image/location_icon/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

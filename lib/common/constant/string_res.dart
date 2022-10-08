@@ -50,6 +50,17 @@ Login or Register""";
   static const String microwave = 'Microwave';
   static const String ring = 'Ring';
   static const String wallet = 'Wallet';
-
-
- }
+  static const String nearyou = 'Near you';
+  static const String californiauSA = 'California, USA';
+  static const String hawaihanamulu = 'Hawai, Hanamulu';
+  static const String alaska = 'Alaska, Alaska';
+  static const String kolkataindia = 'Kolkata, India';
+  static const String all = 'All';
+  static const String top = 'Top';
+  static const String regular = 'Regular';
+  static const String selectcategory = 'Select Category';
+  static const String location = 'Location';
+  static const String californiaUSA = 'California, USA';
+  static const String apply = 'Apply';
+  static const String selectdistance = 'Select Distance';
+}

@@ -2,15 +2,92 @@ import 'package:ecommerce/common/constant/color_res.dart';
 import 'package:ecommerce/common/constant/image_res.dart';
 import 'package:ecommerce/common/constant/string_res.dart';
 import 'package:ecommerce/common/widget/common_listtile.dart';
+import 'package:ecommerce/common/widget/common_text.dart';
 import 'package:ecommerce/common/widget/elevated_button.dart';
+import 'package:ecommerce/screen/home_page/home_page.dart';
+import 'package:ecommerce/screen/like_page/like_page.dart';
+import 'package:ecommerce/screen/login_page/login_page.dart';
+import 'package:ecommerce/screen/message_page/message_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Homepage {
+List<String> name = [
+  (StringResources.hotel),
+  (StringResources.car),
+  (StringResources.smartphone),
+  (StringResources.more)
+];
 
-}
+List<String> img = [
+  (ImageResources.hotel),
+  (ImageResources.car),
+  (ImageResources.smartphone),
+  (ImageResources.category)
+];
+
+List<String> adsimg = [
+  (ImageResources.carimag),
+  (ImageResources.comimg),
+  (ImageResources.carimag),
+  (ImageResources.comimg)
+];
+
+List<String> prizename = [
+  (StringResources.prize),
+  (StringResources.prize2),
+  (StringResources.prize),
+  (StringResources.prize2)
+];
+
+List<String> modelname = [
+  (StringResources.bmw2021),
+  (StringResources.imaccomputer),
+  (StringResources.bmw2021),
+  (StringResources.imaccomputer)
+];
+
+List<String> gridimg = [
+  (ImageResources.grid1pic),
+  (ImageResources.grid2pic),
+  (ImageResources.grid3pic),
+  (ImageResources.grid4pic)
+];
+
+List<String> gridname = [
+  (StringResources.canonlens),
+  (StringResources.microwave),
+  (StringResources.wallet),
+  (StringResources.ring)
+];
+
+List<String> locationname1 = [
+  (StringResources.californiauSA),
+  (StringResources.hawaihanamulu),
+  (StringResources.californiauSA),
+  (StringResources.hawaihanamulu)
+];
+
+List<String> locationname2 = [
+  (StringResources.alaska),
+  (StringResources.kolkataindia),
+  (StringResources.alaska),
+  (StringResources.kolkataindia)
+];
+
+List<String> iconimg = [
+  (ImageResources.home),
+  (ImageResources.heart),
+  (ImageResources.message),
+  (ImageResources.usericon)
+];
+
+List<Widget> navigator = [
+  const HomePage(),
+  const LikePage(),
+  const MessagePage(),
+  const LoginPage(),
+];
 
 Future<void> showMyDialog(BuildContext context) async {
   return showDialog<void>(
@@ -72,8 +149,7 @@ Future<void> showMyDialog(BuildContext context) async {
   );
 }
 
-
-draweropen() {
+draweropen(BuildContext context) {
   return Drawer(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -84,7 +160,6 @@ draweropen() {
             height: 125,
             color: ColorResource.green,
             child: Row(
-              //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -96,22 +171,27 @@ draweropen() {
                     ),
                   ),
                 ),
-                Text(
-                  StringResources.drawername,
-                  style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
+                const CommonText(
+                    text: StringResources.drawername,
                     fontSize: 14,
                     color: ColorResource.white,
-                    fontWeight: FontWeight.w500,
-                  )),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20, left: 5),
-                  child: SizedBox(
-                    height: 20,
-                    width: 20,
-                    child: SvgPicture.asset(
-                      ImageResources.arrowicon,
+                    fontWeight: FontWeight.w500),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return const LoginPage();
+                      },
+                    ));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 20, left: 5),
+                    child: SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: SvgPicture.asset(
+                        ImageResources.arrowicon,
+                      ),
                     ),
                   ),
                 ),
@@ -123,27 +203,45 @@ draweropen() {
         const CommonListTile(
           text: ImageResources.camera,
           titletext: StringResources.camera,
+          fontSize: 15,
+          fontWeight: FontWeight.w400,
+          imgtext: ImageResources.backarow,
         ),
         const CommonListTile(
           text: ImageResources.category,
           titletext: StringResources.categories,
+          fontSize: 15,
+          fontWeight: FontWeight.w400,
+          imgtext: ImageResources.backarow,
         ),
         const CommonListTile(
           text: ImageResources.ads,
           titletext: StringResources.ads,
+          fontSize: 15,
+          fontWeight: FontWeight.w400,
+          imgtext: ImageResources.backarow,
         ),
         const CommonListTile(
           text: ImageResources.space,
           titletext: StringResources.space,
+          fontSize: 15,
+          fontWeight: FontWeight.w400,
+          imgtext: ImageResources.backarow,
         ),
         CommonListTile(
           onTap: () {},
           text: ImageResources.user,
           titletext: StringResources.user,
+          fontSize: 15,
+          fontWeight: FontWeight.w400,
+          imgtext: ImageResources.backarow,
         ),
         const CommonListTile(
           text: ImageResources.help,
           titletext: StringResources.help,
+          fontSize: 15,
+          fontWeight: FontWeight.w400,
+          imgtext: ImageResources.backarow,
         ),
         Padding(
           padding: const EdgeInsets.only(top: 60, right: 170),

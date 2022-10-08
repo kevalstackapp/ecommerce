@@ -1,4 +1,3 @@
-import 'package:ecommerce/common/constant/image_res.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,7 +10,9 @@ class CommonListTile extends StatelessWidget {
   final VoidCallback? onTap;
   final String? text;
   final String? titletext;
-
+  final double? fontSize;
+  final FontWeight? fontWeight;
+  final String? imgtext;
   const CommonListTile(
       {Key? key,
       this.title,
@@ -19,7 +20,7 @@ class CommonListTile extends StatelessWidget {
       this.onTap,
       this.text,
       this.titletext,
-      this.color})
+      this.color, this.fontSize, this.fontWeight, this.imgtext,})
       : super(key: key);
 
   @override
@@ -36,21 +37,21 @@ class CommonListTile extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(10),
-          child: SvgPicture.asset(
+          child: (text == null) ?const SizedBox() :SvgPicture.asset(
             text!,
-          ),
+          )
         ),
       ),
       title: Text(
         titletext!,
         style: GoogleFonts.poppins(
-            textStyle: const TextStyle(
-          fontSize: 15,
-          fontWeight: FontWeight.w400,
+            textStyle:  TextStyle(
+          fontSize: fontSize!,
+          fontWeight: fontWeight!,
         )),
       ),
       subtitle: subtitle,
-      trailing: SvgPicture.asset(ImageResources.backarow),
+      trailing: (imgtext == null) ?const SizedBox() :SvgPicture.asset(imgtext!),
       textColor: color,
       onTap: onTap,
       iconColor: color,

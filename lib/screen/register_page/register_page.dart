@@ -185,8 +185,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void submit() {
     final isValid = formGlobalKey.currentState?.validate();
-    if (!isValid!) {
-    isValid == null ? Navigator.push(context, MaterialPageRoute(builder: (context) {
+    if (isValid!) {
+    isValid == true ? Navigator.push(context, MaterialPageRoute(builder: (context) {
       return   const LoginPage();
       },)): const Text("");
     }
