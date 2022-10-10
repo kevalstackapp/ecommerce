@@ -2,10 +2,12 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:ecommerce/common/constant/color_res.dart';
 import 'package:ecommerce/common/constant/image_res.dart';
 import 'package:ecommerce/common/constant/string_res.dart';
+import 'package:ecommerce/common/widget/common_navigator.dart';
 import 'package:ecommerce/common/widget/common_text.dart';
 import 'package:ecommerce/common/widget/search_text_field.dart';
 import 'package:ecommerce/screen/home_page/widget.dart';
 import 'package:ecommerce/screen/location_page/location_page.dart';
+import 'package:ecommerce/screen/notifications_page/notifications_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -68,11 +70,17 @@ class _HomePageState extends State<HomePage> {
                       child: Image.asset(
                         ImageResources.looklogo,
                       )),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    height: 47,
-                    child: SvgPicture.asset(
-                      ImageResources.notificationimg,
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(context,
+                          CommonNavigator(child: const NotificationsPage()));
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      height: 47,
+                      child: SvgPicture.asset(
+                        ImageResources.notificationimg,
+                      ),
                     ),
                   )
                 ],
@@ -106,8 +114,7 @@ class _HomePageState extends State<HomePage> {
                         ImageResources.layoutlogo,
                       ),
                     ),
-                    onSelected: (value) {
-                    },
+                    onSelected: (value) {},
                     itemBuilder: (BuildContext bc) {
                       return const [
                         PopupMenuItem(
@@ -125,11 +132,11 @@ class _HomePageState extends State<HomePage> {
                       ];
                     },
                   ),
-                  InkWell(onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
-                      return const LocationPage();
-                    },));
-                  },
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(context,
+                          CommonNavigator(child: const LocationPage()));
+                    },
                     child: Container(
                       height: 47,
                       padding: const EdgeInsets.only(
@@ -285,7 +292,6 @@ class _HomePageState extends State<HomePage> {
                                       fontSize: 10,
                                       color: ColorResource.grey,
                                     ),
-
                                   ],
                                 ),
                                 const SizedBox(

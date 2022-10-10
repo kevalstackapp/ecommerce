@@ -45,7 +45,7 @@ Login or Register""";
   static const String imaccomputer = 'iMac Computer';
   static const String prize = '\$1000';
   static const String prize2 = '\$2500';
-  static const String share  = 'Share';
+  static const String share = 'Share';
   static const String canonlens = 'Canon Lens';
   static const String microwave = 'Microwave';
   static const String ring = 'Ring';
@@ -63,4 +63,50 @@ Login or Register""";
   static const String californiaUSA = 'California, USA';
   static const String apply = 'Apply';
   static const String selectdistance = 'Select Distance';
+
+  static const service = 'Service';
+  static const communities = 'Community';
+  static const realstate = 'Real State';
+  static const yardsales = 'Yard Sales';
+  static const jobs = 'Jobs';
+  static const autoparts = 'Auto Parts';
+  static const children = 'Children';
+  static const boat = 'Boats';
+  static const games = 'Games';
+  static const speaker = 'Music';
+  static const vehicles = 'Vehicles';
+  static const jewellery = 'Jewellery';
+  static const antiques = 'Antiques';
+  static const art = 'Art';
+  static const books = 'Books';
+
+  static const automotive = 'Automotive';
+  static const beautymakeup = 'Beauty & Makeup';
+  static const cellphone = 'Cell Phone';
+  static const computer = 'Computer';
+  static const creative = 'Creative';
+  static const bycycleRepair = 'Bycycle Repair';
+  static const healthFitness = 'Health & Fitness';
+  static const laborMoving = 'Labor/Moving';
+  static const legal = 'Legal';
+  static const marine = 'Marine';
+  static const petService = 'Pet Service';
+
+  static const notifications = 'Notifications';
+  static const timenotifi = 'Today at 06:00 AM';
+  static const notifitext = """Thanks for joining the LookPrior 
+Marketplace""";
+  static const messtime = '2 days ago';
+
+  static const notifitext1 = """Your Listing is rejected from
+LookPrior Marketplace""";
+
+  static const timenotifi1 = 'Yesterday 02:00 PM';
+  static const notifitext2 = """Thanks for joining the LookPrior 
+Marketplace""";
+  static const notifitext3 = """Your Listing is rejected from
+LookPrior Marketplace""";
+  static const notifitext4 = """Your Listing is rejected from
+LookPrior Marketplace""";
+
 }

@@ -75,6 +75,7 @@ flutter:
     - asset/home_page_image/drawer_image/
     - asset/home_page_image/floating_icon/
     - asset/home_page_image/location_icon/
+    - asset/category_page_icon/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

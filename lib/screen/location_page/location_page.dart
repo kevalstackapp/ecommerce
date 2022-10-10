@@ -3,8 +3,10 @@ import 'package:ecommerce/common/constant/color_res.dart';
 import 'package:ecommerce/common/constant/image_res.dart';
 import 'package:ecommerce/common/constant/string_res.dart';
 import 'package:ecommerce/common/widget/common_listtile.dart';
+import 'package:ecommerce/common/widget/common_navigator.dart';
 import 'package:ecommerce/common/widget/common_text.dart';
 import 'package:ecommerce/common/widget/elevated_button.dart';
+import 'package:ecommerce/screen/location_page/category_page/category_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -29,7 +31,6 @@ class _LocationPageState extends State<LocationPage> {
       target: LatLng(37.43296265331129, -122.08832357078792),
       tilt: 59.440717697143555,
       zoom: 19.151926040649414);
-
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +88,11 @@ class _LocationPageState extends State<LocationPage> {
                         borderRadius:
                             const BorderRadius.all(Radius.circular(8)),
                         border: Border.all(color: Colors.grey, width: 0.4)),
-                    child: const CommonListTile(
+                    child: CommonListTile(
+                      onTap: () {
+                        Navigator.push(
+                            context, CommonNavigator(child: const CategoryPage()));
+                      },
                       text: ImageResources.category,
                       titletext: StringResources.selectcategory,
                       fontSize: 16,
@@ -141,16 +146,28 @@ class _LocationPageState extends State<LocationPage> {
                     min: 0,
                     max: 250,
                   ),
-                  SizedBox(
-                    height: 300,
-                    width: 150,
+                  Container(
+                    height: 200,
+                    width: 50,
+                    margin: const EdgeInsets.all(10),
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(8))),
                     child: GoogleMap(
+                      compassEnabled: true,
+                      myLocationEnabled: true,
+                      zoomGesturesEnabled: true,
+                      scrollGesturesEnabled: true,
+                      myLocationButtonEnabled: true,
+                      rotateGesturesEnabled: true,
                       mapType: MapType.normal,
                       initialCameraPosition: _kGooglePlex,
                       onMapCreated: (GoogleMapController controller) {
                         _controller.complete(controller);
                       },
                     ),
+                  ),
+                  const SizedBox(
+                    height: 15,
                   ),
                   CommonElevatedButton(
                     onPressed: () {
@@ -162,12 +179,16 @@ class _LocationPageState extends State<LocationPage> {
                     text: StringResources.apply,
                     textColor: ColorResource.white,
                   ),
+                  const SizedBox(
+                    height: 15,
+                  ),
                 ],
               )),
         ),
       ]),
     );
   }
+
   Future<void> _goToTheLake() async {
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));

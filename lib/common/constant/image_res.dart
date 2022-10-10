@@ -4,8 +4,10 @@ class ImageResources {
   static const drawerimage = 'asset/home_page_image/drawer_image/';
   static const floatingicon = 'asset/home_page_image/floating_icon/';
   static const locationicon = 'asset/home_page_image/location_icon/';
+  static const categorypageicon = 'asset/category_page_icon/';
 
   static const splashscrrenLogo = 'asset/Screen Shot 2021-04-07 at 8.09 1.png';
+  static const lookPrior = 'asset/Group 10219.svg';
 
   static const loginLogo = '${images}login_logo.png';
   static const youricon = '${images}User.svg';
@@ -51,4 +53,22 @@ class ImageResources {
   static const editicon = '${locationicon}Edit.svg';
   static const Locationicon1 = '${locationicon}Locationicon1.svg';
   static const googlemap = '${locationicon}googkemap.png';
+
+  static const service = '${categorypageicon}Service.svg';
+  static const communities = '${categorypageicon}communities.svg';
+  static const realstate = '${categorypageicon}Real State.svg';
+  static const yardsales = '${categorypageicon}Yard Sales.svg';
+  static const jobs = '${categorypageicon}jobs.svg';
+  static const autoparts = '${categorypageicon}Auto Parts.svg';
+  static const children = '${categorypageicon}Children.svg';
+  static const boat = '${categorypageicon}boat.svg';
+  static const games = '${categorypageicon}games.svg';
+  static const speaker = '${categorypageicon}speaker.svg';
+  static const vehicles = '${categorypageicon}Vehicles.svg';
+  static const jewellery = '${categorypageicon}Jewellery.svg';
+  static const antiques = '${categorypageicon}Antiques.svg';
+  static const art = '${categorypageicon}Art.svg';
+  static const books = '${categorypageicon}books.svg';
+  static const chekicon = '${categorypageicon}chekicon.svg';
+
 }
