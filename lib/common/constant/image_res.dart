@@ -71,4 +71,9 @@ class ImageResources {
   static const books = '${categorypageicon}books.svg';
   static const chekicon = '${categorypageicon}chekicon.svg';
 
+  static const infomationicon= image + 'infomationicon.svg';
+  static const videoicon = image + 'videoicon.svg';
+  static const imageicon = image + 'imageicon.svg';
+  static const ArrowRight = image + 'Arrow - Right.svg';
+
 }

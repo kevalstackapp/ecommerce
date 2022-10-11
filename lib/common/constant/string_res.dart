@@ -109,4 +109,32 @@ LookPrior Marketplace""";
   static const notifitext4 = """Your Listing is rejected from
 LookPrior Marketplace""";
 
+  static const PostyourAd = 'Post your Ad';
+  static const Media = 'Media';
+  static const videotext1 =
+      """Listing with videos sell 20x faster compared to ads 
+without videos""";
+  static const videorext2 =
+      """Tap the icon below to record a short video for your listing.\nYour video file size must be 6MB or less. Post up to 3\nvideos for free! Need to upload a larger video file or want\nto add more than three? That's OK! We have many\nstorage options to choose from. You will be able to post\nlarger video files after increasing the storage capacity
+""";
+
+  static const imagetext1 = """Add Photos to attract more people to 
+your listing.""";
+  static const imagetext2 =
+      """Quality images of your items will attract more buyers.\nUse the icon below to take pictures or upload images\nalready stored on your phone. 
+""";
+
+  static const AddVideos = 'Add Videos';
+  static const AddPhotos = 'Add Photos';
+
+  static const posttext = """Need to upload a larger video file? That's OK! We have\nmany storage options to choose from. The more you\nshowcase the items, the faster they sell. 
+""";
+  static const Gotomyoptions = 'Go to my options';
+  static const Next = 'Next';
+
+  static const RecordVideo = 'Record Video';
+  static const Choosefromlibrary = 'Choose from library';
+  static const Cancel = 'Cancel';
+
+  static const TakePhoto = 'TakePhoto';
 }

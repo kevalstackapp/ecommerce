@@ -8,6 +8,7 @@ import 'package:ecommerce/common/widget/search_text_field.dart';
 import 'package:ecommerce/screen/home_page/widget.dart';
 import 'package:ecommerce/screen/location_page/location_page.dart';
 import 'package:ecommerce/screen/notifications_page/notifications_page.dart';
+import 'package:ecommerce/screen/post_add_page/post_add_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -446,7 +447,10 @@ class _HomePageState extends State<HomePage> {
           ),
         ]),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+                context, CommonNavigator(child: const PostAddPage()));
+          },
           backgroundColor: ColorResource.green,
           child: const Icon(
             size: 40,

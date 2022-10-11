@@ -2,10 +2,12 @@ import 'package:ecommerce/common/constant/color_res.dart';
 import 'package:ecommerce/common/constant/image_res.dart';
 import 'package:ecommerce/common/constant/string_res.dart';
 import 'package:ecommerce/common/widget/common_listtile.dart';
+import 'package:ecommerce/common/widget/common_navigator.dart';
 import 'package:ecommerce/common/widget/common_text.dart';
 import 'package:ecommerce/common/widget/elevated_button.dart';
 import 'package:ecommerce/screen/home_page/home_page.dart';
 import 'package:ecommerce/screen/like_page/like_page.dart';
+import 'package:ecommerce/screen/location_page/category_page/category_page.dart';
 import 'package:ecommerce/screen/login_page/login_page.dart';
 import 'package:ecommerce/screen/message_page/message_page.dart';
 import 'package:flutter/material.dart';
@@ -178,6 +180,7 @@ draweropen(BuildContext context) {
                     fontWeight: FontWeight.w500),
                 InkWell(
                   onTap: () {
+
                     Navigator.push(context, MaterialPageRoute(
                       builder: (context) {
                         return const LoginPage();
@@ -207,7 +210,12 @@ draweropen(BuildContext context) {
           fontWeight: FontWeight.w400,
           imgtext: ImageResources.backarow,
         ),
-        const CommonListTile(
+        CommonListTile(
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.push(
+                context, CommonNavigator(child: const CategoryPage()));
+          },
           text: ImageResources.category,
           titletext: StringResources.categories,
           fontSize: 15,

@@ -9,6 +9,7 @@ import 'package:ecommerce/common/widget/elevated_button.dart';
 import 'package:ecommerce/screen/location_page/category_page/category_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class LocationPage extends StatefulWidget {
   const LocationPage({Key? key}) : super(key: key);
@@ -18,14 +19,12 @@ class LocationPage extends StatefulWidget {
 }
 
 class _LocationPageState extends State<LocationPage> {
-  int age = 10;
-  final Completer<GoogleMapController> _controller = Completer();
-
+  Completer<GoogleMapController> _controller = Completer();
+  double _value = 50;
   static const CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
     zoom: 14.4746,
   );
-
   static const CameraPosition _kLake = CameraPosition(
       bearing: 192.8334901395799,
       target: LatLng(37.43296265331129, -122.08832357078792),
@@ -71,8 +70,12 @@ class _LocationPageState extends State<LocationPage> {
                     topLeft: Radius.circular(30),
                     topRight: Radius.circular(30),
                   )),
-              child: ListView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: CommonText(
@@ -90,8 +93,8 @@ class _LocationPageState extends State<LocationPage> {
                         border: Border.all(color: Colors.grey, width: 0.4)),
                     child: CommonListTile(
                       onTap: () {
-                        Navigator.push(
-                            context, CommonNavigator(child: const CategoryPage()));
+                        Navigator.push(context,
+                            CommonNavigator(child: const CategoryPage()));
                       },
                       text: ImageResources.category,
                       titletext: StringResources.selectcategory,
@@ -132,42 +135,47 @@ class _LocationPageState extends State<LocationPage> {
                       fontSize: 14,
                     ),
                   ),
-                  Slider(
-                    divisions: 5,
+                  SfSlider(
+                    min: 50,
+                    max: 250,
+                    value: _value,
+                    interval: 50,
+                    showTicks: true,
+                    showLabels: true,
+                    enableTooltip: true,
                     activeColor: ColorResource.green,
-                    inactiveColor: ColorResource.grey.withOpacity(0.4),
-                    label: age.toString(),
-                    value: age.toDouble(),
-                    onChanged: (value) {
+                    stepSize: 50,
+                    inactiveColor: ColorResource.grey.withOpacity(0.3),
+                    onChanged: (dynamic value) {
                       setState(() {
-                        age = value.toInt();
+                        _value = value;
                       });
                     },
-                    min: 0,
-                    max: 250,
                   ),
-                  Container(
-                    height: 200,
-                    width: 50,
-                    margin: const EdgeInsets.all(10),
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(8))),
-                    child: GoogleMap(
-                      compassEnabled: true,
-                      myLocationEnabled: true,
-                      zoomGesturesEnabled: true,
-                      scrollGesturesEnabled: true,
-                      myLocationButtonEnabled: true,
-                      rotateGesturesEnabled: true,
-                      mapType: MapType.normal,
-                      initialCameraPosition: _kGooglePlex,
-                      onMapCreated: (GoogleMapController controller) {
-                        _controller.complete(controller);
-                      },
+                  Expanded(
+                    child: Container(
+                      height: 200,
+                      width: double.infinity,
+                      margin: const EdgeInsets.all(10),
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(8))),
+                      child: GoogleMap(
+                        compassEnabled: true,
+                        myLocationEnabled: true,
+                        zoomGesturesEnabled: true,
+                        scrollGesturesEnabled: true,
+                        myLocationButtonEnabled: true,
+                        rotateGesturesEnabled: true,
+                        mapType: MapType.normal,
+                        initialCameraPosition: _kGooglePlex,
+                        onMapCreated: (GoogleMapController controller) {
+                          _controller.complete(controller);
+                        },
+                      ),
                     ),
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: 10,
                   ),
                   CommonElevatedButton(
                     onPressed: () {
@@ -180,7 +188,7 @@ class _LocationPageState extends State<LocationPage> {
                     textColor: ColorResource.white,
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: 10,
                   ),
                 ],
               )),
