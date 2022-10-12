@@ -1,13 +1,18 @@
 import 'package:ecommerce/common/constant/color_res.dart';
 import 'package:ecommerce/common/constant/string_res.dart';
 import 'package:ecommerce/common/widget/common_text.dart';
+import 'package:ecommerce/screen/post_add_page/post_add_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class PostAddPageWidget {
+class PostAddPageViewModel {
+  final PostAddPageState postAddPageState;
+
+  PostAddPageViewModel(this.postAddPageState);
+
   showModelButtomsSheetVideo(BuildContext context) {
     return showModalBottomSheet(
       shape: const RoundedRectangleBorder(
@@ -27,14 +32,7 @@ class PostAddPageWidget {
                   children: [
                     InkWell(
                       onTap: () async {
-                        try {
-                          final image = await ImagePicker()
-                              .pickVideo(source: ImageSource.camera);
-                        } on PlatformException catch (e) {
-                          if (kDebugMode) {
-                            print('Failed to pick image: $e');
-                          }
-                        }
+                        videoMethod(ImageSource.camera);
                       },
                       child: const CommonText(
                         text: StringResources.RecordVideo,
@@ -44,11 +42,16 @@ class PostAddPageWidget {
                       ),
                     ),
                     const Divider(),
-                    const CommonText(
-                      text: StringResources.Choosefromlibrary,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                      color: ColorResource.black,
+                    InkWell(
+                      onTap: () async {
+                        videoMethod(ImageSource.gallery);
+                      },
+                      child: const CommonText(
+                        text: StringResources.Choosefromlibrary,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                        color: ColorResource.black,
+                      ),
                     ),
                     const Divider(),
                     const CommonText(
@@ -87,12 +90,7 @@ class PostAddPageWidget {
                   children: [
                     InkWell(
                       onTap: () async {
-                        try {
-                          final image = await ImagePicker()
-                              .pickImage(source: ImageSource.gallery);
-                        } on PlatformException catch (e) {
-                          print('Failed to pick image: $e');
-                        }
+                        imgMethod(ImageSource.camera);
                       },
                       child: const CommonText(
                         text: StringResources.TakePhoto,
@@ -102,11 +100,16 @@ class PostAddPageWidget {
                       ),
                     ),
                     const Divider(),
-                    const CommonText(
-                      text: StringResources.Choosefromlibrary,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                      color: ColorResource.black,
+                    InkWell(
+                      onTap: () async {
+                        multiImgMethod(ImageSource.gallery);
+                      },
+                      child: const CommonText(
+                        text: StringResources.Choosefromlibrary,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                        color: ColorResource.black,
+                      ),
                     ),
                     const Divider(),
                     const CommonText(
@@ -127,19 +130,65 @@ class PostAddPageWidget {
   }
 
   Future<void> requestCameraPermission() async {
-    final serviceStatus = await Permission.camera.isGranted;
+    //final serviceStatus = await Permission.camera.isGranted;
 
-    bool isCameraOn = serviceStatus == ServiceStatus.enabled;
+    // bool isCameraOn = serviceStatus == ServiceStatus.enabled;
 
     final status = await Permission.camera.request();
 
     if (status == PermissionStatus.granted) {
-      print('Permission Granted');
+      if (kDebugMode) {
+        print('Permission Granted');
+      }
     } else if (status == PermissionStatus.denied) {
-      print('Permission denied');
+      if (kDebugMode) {
+        print('Permission denied');
+      }
     } else if (status == PermissionStatus.permanentlyDenied) {
-      print('Permission Permanently Denied');
+      if (kDebugMode) {
+        print('Permission Permanently Denied');
+      }
       await openAppSettings();
+    }
+  }
+
+  imgMethod(ImageSource imageSource) async {
+    try {
+      XFile? image = await ImagePicker().pickImage(source: imageSource);
+      if (image == null) return;
+      postAddPageState.imgpath.add(image);
+      postAddPageState.setState(() {});
+    } on PlatformException catch (e) {
+      if (kDebugMode) {
+        print('Failed to pick image: $e');
+      }
+    }
+  }
+
+  multiImgMethod(ImageSource imageSource) async {
+    try {
+      List<XFile> image = await ImagePicker().pickMultiImage();
+      if (image == null) return;
+      postAddPageState.imgpath.addAll(image);
+      postAddPageState.setState(() {});
+    } on PlatformException catch (e) {
+      if (kDebugMode) {
+        print('Failed to pick image: $e');
+      }
+    }
+  }
+
+  videoMethod(ImageSource imageSource) async {
+    try {
+      XFile? video = await ImagePicker().pickVideo(
+          source: imageSource, maxDuration: const Duration(seconds: 10));
+      if (video == null) return;
+      postAddPageState.videopath = video.path;
+      postAddPageState.setState(() {});
+    } on PlatformException catch (e) {
+      if (kDebugMode) {
+        print('Failed to pick image: $e');
+      }
     }
   }
 }

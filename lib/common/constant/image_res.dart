@@ -76,4 +76,6 @@ class ImageResources {
   static const imageicon = image + 'imageicon.svg';
   static const ArrowRight = image + 'Arrow - Right.svg';
 
+  static const removeicon = image + 'removeicon.svg';
+
 }
