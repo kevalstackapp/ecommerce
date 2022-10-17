@@ -45,6 +45,15 @@ dependencies:
   permission_handler: 10.1.0
   image_picker: 0.8.6
   video_player: 2.4.7
+  video_thumbnail: 0.5.3
+  http: 0.13.5
+  firebase_core: 1.24.0
+  firebase_auth: 3.11.2
+  firebase_messaging: 13.1.0
+  shared_preferences: 2.0.15
+  flutter_facebook_auth: 4.4.0
+  google_sign_in: 5.4.2
+
 
 
 dev_dependencies:
@@ -80,6 +89,7 @@ flutter:
     - asset/home_page_image/floating_icon/
     - asset/home_page_image/location_icon/
     - asset/category_page_icon/
+    - asset/storage_img/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

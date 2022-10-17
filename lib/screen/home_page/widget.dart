@@ -173,28 +173,24 @@ draweropen(BuildContext context) {
                     ),
                   ),
                 ),
-                const CommonText(
-                    text: StringResources.drawername,
-                    fontSize: 14,
-                    color: ColorResource.white,
-                    fontWeight: FontWeight.w500),
                 InkWell(
                   onTap: () {
-
-                    Navigator.push(context, MaterialPageRoute(
-                      builder: (context) {
-                        return const LoginPage();
-                      },
-                    ));
+                    Navigator.push(
+                        context, CommonNavigator(child: const LoginPage()));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 20, left: 5),
-                    child: SizedBox(
-                      height: 20,
-                      width: 20,
-                      child: SvgPicture.asset(
-                        ImageResources.arrowicon,
-                      ),
+                  child: const CommonText(
+                      text: StringResources.drawername,
+                      fontSize: 14,
+                      color: ColorResource.white,
+                      fontWeight: FontWeight.w500),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20, left: 5),
+                  child: SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: SvgPicture.asset(
+                      ImageResources.arrowicon,
                     ),
                   ),
                 ),

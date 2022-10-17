@@ -1,10 +1,13 @@
 import 'dart:io';
-
 import 'package:ecommerce/common/constant/color_res.dart';
 import 'package:ecommerce/common/constant/image_res.dart';
 import 'package:ecommerce/common/constant/string_res.dart';
+import 'package:ecommerce/common/widget/app_video_player.dart';
+import 'package:ecommerce/common/widget/common_navigator.dart';
 import 'package:ecommerce/common/widget/common_text.dart';
 import 'package:ecommerce/common/widget/elevated_button.dart';
+import 'package:ecommerce/screen/post_add_page/post_ad_details_page/post_ad_details_page.dart';
+import 'package:ecommerce/screen/post_add_page/storage_page/storage_page.dart';
 import 'package:ecommerce/screen/post_add_page/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,23 +24,10 @@ class PostAddPage extends StatefulWidget {
 class PostAddPageState extends State<PostAddPage> {
   PostAddPageViewModel? postAddPageViewModel;
   List<XFile> imgpath = [];
-  String videopath = "";
+
   late VideoPlayerController controller;
 
-  @override
-  void initState() {
-    super.initState();
-    pickVideoo();
-  }
-
-  pickVideoo() {
-    controller = VideoPlayerController.file(File(videopath))
-      ..initialize().then((_) {
-        setState(() {
-          controller.play();
-        });
-      });
-  }
+  List<String> videopath = [];
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +53,7 @@ class PostAddPageState extends State<PostAddPage> {
                     width: 50,
                   ),
                   const CommonText(
-                    text: StringResources.notifications,
+                    text: StringResources.PostyourAd,
                     color: ColorResource.white,
                     fontWeight: FontWeight.w500,
                     fontSize: 20,
@@ -73,11 +63,12 @@ class PostAddPageState extends State<PostAddPage> {
         ),
         Expanded(
           child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 10),
             decoration: const BoxDecoration(
                 color: ColorResource.white,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
+                  topLeft: Radius.circular(25),
+                  topRight: Radius.circular(25),
                 )),
             child: ListView(children: [
               Card(
@@ -115,84 +106,111 @@ class PostAddPageState extends State<PostAddPage> {
                           color: ColorResource.grey,
                         ),
                       ),
-                      InkWell(
-                        onTap: () async {
-                          postAddPageViewModel!.showModelButtomsSheetVideo(
-                            context,
-                          );
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                children: [
-                                  controller.value.isInitialized
-                                      ? SizedBox(
-                                          height: 100,
-                                          width: 150,
-                                          child: Stack(children: [
-                                            AspectRatio(
-                                              aspectRatio:
-                                                  controller.value.aspectRatio,
-                                              child: VideoPlayer(controller),
-                                            ),
-                                            IconButton(
-                                                onPressed: () {
-                                                  setState(() {
-                                                    //controller.value.isPlaying;
-                                                //    pickVideoo();
-                                                  });
-                                                },
-                                                icon: Icon(
-                                                  controller.value.isPlaying
-                                                      ? Icons.pause
-                                                      : Icons.play_arrow,
-                                                  color: ColorResource.white,
-                                                ))
-                                          ]),
-                                        )
-                                      : const SizedBox(
-                                          height: 50,
-                                          width: 50,
-                                        ),
-                                  ElevatedButton(
-                                      onPressed: () {
-                                        pickVideoo();
-                                      },
-                                      child: const Text("view")),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 15),
-                                    child: SizedBox(
-                                      height: 109,
-                                      width: 113,
-                                      child: Stack(children: [
-                                        SvgPicture.asset(
-                                            ImageResources.videoicon),
-                                        const Padding(
-                                          padding: EdgeInsets.only(
-                                              left: 19, top: 62),
-                                          child: CommonText(
-                                            text: StringResources.AddVideos,
-                                            color: ColorResource.green,
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ]),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                postAddPageViewModel!
+                                    .showModelButtomsSheetVideo(
+                                  context,
+                                );
+                              },
+                              child: SizedBox(
+                                height: 109,
+                                width: 113,
+                                child: Stack(children: [
+                                  SvgPicture.asset(ImageResources.videoicon),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 19, top: 62),
+                                    child: CommonText(
+                                      text: StringResources.AddVideos,
+                                      color: ColorResource.green,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
-                                ],
+                                ]),
                               ),
                             ),
-                          ),
-
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: SizedBox(
+                                height: 100,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: videopath.length,
+                                  itemBuilder: (context, index) {
+                                    return Row(
+                                      children: [
+                                        Stack(children: [
+                                          FutureBuilder<String?>(
+                                            future: postAddPageViewModel!
+                                                .videoThumbnail(index),
+                                            builder: (context, snapshot) {
+                                              if (snapshot.data != null &&
+                                                  snapshot.hasData) {
+                                                return InkWell(
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                        context,
+                                                        CommonNavigator(
+                                                            child: AppVideoPlayer(
+                                                                videopath[
+                                                                    index])));
+                                                  },
+                                                  child: Container(
+                                                      height: 109,
+                                                      width: 113,
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              const BorderRadius
+                                                                      .all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          8)),
+                                                          image:
+                                                              DecorationImage(
+                                                                  image:
+                                                                      FileImage(
+                                                                    File(snapshot
+                                                                        .data!),
+                                                                  ),
+                                                                  fit: BoxFit
+                                                                      .fill)),
+                                                      child: const Icon(
+                                                        Icons.play_circle,
+                                                        color:
+                                                            ColorResource.green,
+                                                      )),
+                                                );
+                                              } else {
+                                                return const CircularProgressIndicator();
+                                              }
+                                            },
+                                          ),
+                                          IconButton(
+                                              onPressed: () {
+                                                setState(() {
+                                                  videopath.removeAt(index);
+                                                });
+                                              },
+                                              icon: SvgPicture.asset(
+                                                  ImageResources.removeicon))
+                                        ]),
+                                        const SizedBox(
+                                          width: 5,
+                                        )
+                                      ],
+                                    );
+                                  },
+                                ),
+                              ),
+                            )
+                          ],
                         ),
                       ),
                       const SizedBox(
@@ -227,74 +245,72 @@ class PostAddPageState extends State<PostAddPage> {
                           color: ColorResource.grey,
                         ),
                       ),
-                      InkWell(
-                        onTap: () async {
-                          setState(() {
-                            postAddPageViewModel!
-                                .showModelButtomsSheetPhoto(context);
-                          });
-                          postAddPageViewModel!.requestCameraPermission();
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  height: 109,
-                                  child: ListView.builder(
-                                    shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: imgpath.length,
-                                    itemBuilder: (context, index) {
-                                      return Container(
-                                          alignment: Alignment.topRight,
-                                          height: 109,
-                                          width: 100,
-                                          margin: const EdgeInsets.symmetric(
-                                              horizontal: 3),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                      Radius.circular(5)),
-                                              image: DecorationImage(
-                                                  image: FileImage(File(
-                                                      imgpath[index].path)),
-                                                  fit: BoxFit.fill)),
-                                          child: IconButton(
-                                              onPressed: () {
-                                                setState(() {
-                                                  imgpath.removeAt(index);
-                                                });
-                                              },
-                                              icon: SvgPicture.asset(
-                                                  ImageResources.removeicon)));
-                                    },
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 109,
-                                  width: 113,
-                                  child: Stack(children: [
-                                    SvgPicture.asset(ImageResources.imageicon),
-                                    const Padding(
-                                      padding:
-                                          EdgeInsets.only(left: 19, top: 62),
-                                      child: CommonText(
-                                        text: StringResources.AddPhotos,
-                                        color: ColorResource.green,
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500,
-                                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  postAddPageViewModel!
+                                      .showModelButtomsSheetPhoto(context);
+                                });
+                                postAddPageViewModel!.requestCameraPermission();
+                              },
+                              child: SizedBox(
+                                height: 109,
+                                width: 113,
+                                child: Stack(children: [
+                                  SvgPicture.asset(ImageResources.imageicon),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 19, top: 62),
+                                    child: CommonText(
+                                      text: StringResources.AddPhotos,
+                                      color: ColorResource.green,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w500,
                                     ),
-                                  ]),
-                                ),
-                              ],
+                                  ),
+                                ]),
+                              ),
                             ),
-                          ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: SizedBox(
+                                height: 109,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: imgpath.length,
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                        alignment: Alignment.topRight,
+                                        height: 109,
+                                        width: 113,
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 3),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(5)),
+                                            image: DecorationImage(
+                                                image: FileImage(
+                                                    File(imgpath[index].path)),
+                                                fit: BoxFit.fill)),
+                                        child: IconButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                imgpath.removeAt(index);
+                                              });
+                                            },
+                                            icon: SvgPicture.asset(
+                                                ImageResources.removeicon)));
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       const SizedBox(
@@ -318,7 +334,10 @@ class PostAddPageState extends State<PostAddPage> {
                 height: 20,
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context, CommonNavigator(child: const StoragePage()));
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -338,6 +357,8 @@ class PostAddPageState extends State<PostAddPage> {
               ),
               CommonElevatedButton(
                 onPressed: () {
+                  Navigator.push(context,
+                      CommonNavigator(child: const PostAdDetailsPage()));
                   setState(() {});
                 },
                 buttonColor: ColorResource.green,

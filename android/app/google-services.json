@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "691907991136",
+    "project_id": "lookprior-a05ca",
+    "storage_bucket": "lookprior-a05ca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:691907991136:android:8a5393b9a2c184f1585505",
+        "android_client_info": {
+          "package_name": "com.example.ecommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "691907991136-uoc4po78ul5clavublm4rgcl6lhc2tj6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQ2DrBQi6-71JzvYf8VkqC3wZmZL6hbj8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "691907991136-uoc4po78ul5clavublm4rgcl6lhc2tj6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

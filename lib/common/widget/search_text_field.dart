@@ -17,7 +17,7 @@ class SearchTextField extends StatelessWidget {
       width: 200,
       alignment: Alignment.center,
       child: TextField(
-        style: const TextStyle(color: ColorResource.black),
+        style: const TextStyle(color: ColorResource.white),
         cursorColor: Colors.white,
         decoration: InputDecoration(
             contentPadding: const EdgeInsets.only(bottom: 5, left: 10),

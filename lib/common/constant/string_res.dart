@@ -127,7 +127,8 @@ your listing.""";
   static const AddVideos = 'Add Videos';
   static const AddPhotos = 'Add Photos';
 
-  static const posttext = """Need to upload a larger video file? That's OK! We have\nmany storage options to choose from. The more you\nshowcase the items, the faster they sell. 
+  static const posttext =
+      """Need to upload a larger video file? That's OK! We have\nmany storage options to choose from. The more you\nshowcase the items, the faster they sell. 
 """;
   static const Gotomyoptions = 'Go to my options';
   static const Next = 'Next';
@@ -136,5 +137,33 @@ your listing.""";
   static const Choosefromlibrary = 'Choose from library';
   static const Cancel = 'Cancel';
 
-  static const TakePhoto = 'TakePhoto';
+  static const TakePhoto = 'Take Photo';
+
+  static const increaseStorage = 'increase Storage';
+  static const sellFaster = 'Sell Faster';
+  static const currentStorage = 'Current Storage Plan';
+  static const currentStorageText =
+      """For maximum exposure, you can place your ads\nor listings in as many states and categories\nas you'd like. When you increase your exposure\nto many places or regions, you can sell 60x\nfaster. Try Urgent Sale! 
+""";
+
+  static const threeDollar = '\$3';
+  static const fiveDollar = '\$5';
+  static const eightDollar = '\$8';
+  static const twelveDollar = '\$12';
+  static const fifteenDollar = '\$15';
+
+  static const storagePlan1 = '1 GB Storage Plan';
+  static const storagePlan2 = '2 GB Storage Plan';
+  static const storagePlan3 = '3 GB Storage Plan';
+  static const storagePlan4 = '4 GB Storage Plan';
+  static const storagePlan5 = '5 GB Storage Plan';
+
+  static const pay = 'Pay';
+
+  static const adDetails = 'Ad Details';
+  static const title = 'Title';
+  static const amount = 'Amount';
+  static const amount1 = 'Amount(\$)';
+  static const description = 'Description';
+  
 }

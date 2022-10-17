@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="facebook_app_id">818273196254945</string>
+    <string name="fb_login_protocol_scheme">fb818273196254945</string>
+    <string name="facebook_client_token">7917929a41660b1bc06e007ef6f79abb</string>
+    <string name="app_name">kevallookprior</string>
+</resources>

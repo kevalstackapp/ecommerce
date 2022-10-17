@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
 
 class PostAddPageViewModel {
   final PostAddPageState postAddPageState;
@@ -27,39 +28,46 @@ class PostAddPageViewModel {
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: SizedBox(
-                height: 129,
+                height: 236,
                 child: Column(
                   children: [
-                    InkWell(
-                      onTap: () async {
-                        videoMethod(ImageSource.camera);
-                      },
-                      child: const CommonText(
-                        text: StringResources.RecordVideo,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        color: ColorResource.black,
-                      ),
-                    ),
+                    ListTile(
+                        onTap: () {
+                          videoMethod(ImageSource.camera);
+                          Navigator.pop(context);
+                        },
+                        title: const CommonText(
+                          text: StringResources.RecordVideo,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                          color: ColorResource.black,
+                          textAlign: TextAlign.center,
+                        )),
                     const Divider(),
-                    InkWell(
-                      onTap: () async {
-                        videoMethod(ImageSource.gallery);
-                      },
-                      child: const CommonText(
-                        text: StringResources.Choosefromlibrary,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        color: ColorResource.black,
-                      ),
-                    ),
+                    ListTile(
+                        onTap: () {
+                          videoMethod(ImageSource.gallery);
+                          Navigator.pop(context);
+                        },
+                        title: const CommonText(
+                          text: StringResources.Choosefromlibrary,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                          color: ColorResource.black,
+                          textAlign: TextAlign.center,
+                        )),
                     const Divider(),
-                    const CommonText(
-                      text: StringResources.Cancel,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                      color: ColorResource.red,
-                    ),
+                    ListTile(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        title: const CommonText(
+                          text: StringResources.Cancel,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                          color: ColorResource.red,
+                          textAlign: TextAlign.center,
+                        )),
                     const Divider(),
                   ],
                 ),
@@ -83,41 +91,48 @@ class PostAddPageViewModel {
         return StatefulBuilder(
           builder: (context, setState) {
             return SizedBox(
-              height: 149,
+              height: 236,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Column(
                   children: [
-                    InkWell(
-                      onTap: () async {
-                        imgMethod(ImageSource.camera);
-                      },
-                      child: const CommonText(
-                        text: StringResources.TakePhoto,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        color: ColorResource.black,
-                      ),
-                    ),
+                    ListTile(
+                        onTap: () {
+                          imgMethod(ImageSource.camera);
+                          Navigator.pop(context);
+                        },
+                        title: const CommonText(
+                          text: StringResources.TakePhoto,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                          color: ColorResource.black,
+                          textAlign: TextAlign.center,
+                        )),
                     const Divider(),
-                    InkWell(
-                      onTap: () async {
-                        multiImgMethod(ImageSource.gallery);
-                      },
-                      child: const CommonText(
-                        text: StringResources.Choosefromlibrary,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                        color: ColorResource.black,
-                      ),
-                    ),
+                    ListTile(
+                        onTap: () {
+                          imgMethod(ImageSource.gallery);
+                          Navigator.pop(context);
+                        },
+                        title: const CommonText(
+                          text: StringResources.Choosefromlibrary,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                          color: ColorResource.black,
+                          textAlign: TextAlign.center,
+                        )),
                     const Divider(),
-                    const CommonText(
-                      text: StringResources.Cancel,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                      color: ColorResource.red,
-                    ),
+                    ListTile(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        title: const CommonText(
+                          text: StringResources.Cancel,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w400,
+                          color: ColorResource.red,
+                          textAlign: TextAlign.center,
+                        )),
                     const Divider(),
                   ],
                 ),
@@ -183,7 +198,7 @@ class PostAddPageViewModel {
       XFile? video = await ImagePicker().pickVideo(
           source: imageSource, maxDuration: const Duration(seconds: 10));
       if (video == null) return;
-      postAddPageState.videopath = video.path;
+      postAddPageState.videopath.add(video.path);
       postAddPageState.setState(() {});
     } on PlatformException catch (e) {
       if (kDebugMode) {
@@ -191,4 +206,14 @@ class PostAddPageViewModel {
       }
     }
   }
+
+  Future<String?> videoThumbnail(int index) async {
+    final fileName = await VideoThumbnail.thumbnailFile(
+      imageFormat: ImageFormat.JPEG,
+      video: postAddPageState.videopath[index],
+      quality: 5,
+    );
+    return fileName;
+  }
 }
+

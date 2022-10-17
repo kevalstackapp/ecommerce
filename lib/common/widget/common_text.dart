@@ -6,15 +6,16 @@ class CommonText extends StatelessWidget {
   final double? fontSize;
   final FontWeight? fontWeight;
   final Color? color;
+  final TextAlign? textAlign;
 
   const CommonText(
-      {Key? key, this.text, this.fontSize, this.fontWeight, this.color})
+      {Key? key, this.text, this.fontSize, this.fontWeight, this.color, this.textAlign})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      text!,
+      text!,textAlign: textAlign,
       style: GoogleFonts.poppins(
           textStyle: TextStyle(
               fontSize: fontSize,

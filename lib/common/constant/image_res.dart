@@ -5,6 +5,7 @@ class ImageResources {
   static const floatingicon = 'asset/home_page_image/floating_icon/';
   static const locationicon = 'asset/home_page_image/location_icon/';
   static const categorypageicon = 'asset/category_page_icon/';
+  static const storageImg  = 'asset/storage_img/';
 
   static const splashscrrenLogo = 'asset/Screen Shot 2021-04-07 at 8.09 1.png';
   static const lookPrior = 'asset/Group 10219.svg';
@@ -18,7 +19,7 @@ class ImageResources {
   static const fackbookicon = '${images}Group.svg';
   static const appleicon = '${images}apple.svg';
   static const alertdialogimg = '${image}AlertDialogimg.jpg';
-  static const looklogo = '${image}looklogo.png';
+  static const looklogo = '${image}5 1.png';
   static const drawerimg = '${image}drawerimg.svg';
   static const notificationimg = '${image}notificationimg.svg';
   static const layoutlogo = '${image}layoutlogo.svg';
@@ -77,5 +78,17 @@ class ImageResources {
   static const ArrowRight = image + 'Arrow - Right.svg';
 
   static const removeicon = image + 'removeicon.svg';
+
+  static const blueImg = storageImg + 'blueimg.png';
+  static const purpleImg = storageImg + 'purpleimg.png';
+  static const pincImg = storageImg + 'pincimg.png';
+  static const greenImg = storageImg + 'greenimg.png';
+  static const orangeImg = storageImg + 'orangeimg.png';
+
+  static const blueBaneer = storageImg + 'blueBaneer.png';
+  static const purpelBaneer = storageImg + 'purpelBaneer.png';
+  static const pinkBaneer = storageImg + 'pinkBaneer.png';
+  static const greenBanner = storageImg + 'greenBanner.png';
+  static const orangeBanner = storageImg + 'orangeBanner.png';
 
 }
