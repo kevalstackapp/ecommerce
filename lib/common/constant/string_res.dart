@@ -165,5 +165,40 @@ your listing.""";
   static const amount = 'Amount';
   static const amount1 = 'Amount(\$)';
   static const description = 'Description';
-  
+
+  static const profile = "Profile";
+  static const owner = "Owner";
+  static const videoStorage = "Video Storage: 1 GB of 1 GB";
+  static const myAds = 'My Ads';
+  static const postSomeThing = 'Post something for sale today';
+  static const profileText1 = 'Record it with your phone';
+  static const profileText2 = 'Take a photo of it';
+  static const profileText3 = 'Meet Buyers';
+  static const profileText4 = 'Make Money';
+  static const logOut = 'Log Out';
+  static const changePassword = 'Change password';
+  static const oldPassword = 'Old Password';
+  static const newPassword = 'New Password';
+  static const updatePassword = 'Update Password';
+  static const logoutTitle = 'Are you sure You want to\nlogout?';
+  static const yes = 'YES';
+  static const no = 'NO';
+  static const firstName = 'First name';
+  static const lastName = 'Last name';
+  static const address = 'Address';
+  static const email = 'Email';
+  static const websiteTitle = 'Website (Send People directly to your site)';
+  static const publicProfile = 'Public Profile';
+  static const publicEmail = 'Public Email';
+  static const save = 'Save';
+
+  static const message = 'Message';
+  static const buying = 'Buying';
+  static const selling = 'Selling';
+  static const mithealJohn = 'Mitcheal John';
+  static const mithealJohnTitle = """There are many variations of passages of Ipsum\navailable, but the majority have suffered 
+""";
+
+  static const saved = 'Saved';
+
 }

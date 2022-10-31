@@ -1,4 +1,3 @@
-import 'package:ecommerce/common/app/shred_preference.dart';
 import 'package:ecommerce/common/constant/color_res.dart';
 import 'package:ecommerce/common/constant/image_res.dart';
 import 'package:ecommerce/common/constant/string_res.dart';
@@ -101,18 +100,18 @@ class LoginPageState extends State<LoginPage> {
                                 fontWeight: FontWeight.w400,
                               ))),
                         ),
-                        sizeMaring(),
+                        sizeMarking(),
                         emailTextFiled(email),
-                        sizeMaring(),
-                        passwordTextfFlied(password),
-                        sizeMaring(),
+                        sizeMarking(),
+                        passwordTextFlied(password),
+                        sizeMarking(),
                         Padding(
                           padding: const EdgeInsets.only(left: 180),
                           child: TextButton(
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(
                                   builder: (context) {
-                                    return const Forgotpassword();
+                                    return const ForgotPassword();
                                   },
                                 ));
                               },
@@ -129,35 +128,35 @@ class LoginPageState extends State<LoginPage> {
                         CommonElevatedButton(
                           onPressed: () async {
                             submit();
-                            log("========dkff");
+
                           },
                           buttonColor: ColorResource.green,
                           text: StringResources.loginname,
                           textColor: ColorResource.white,
                         ),
-                        sizeMaring(),
+                        sizeMarking(),
                         Padding(
                             padding: const EdgeInsets.only(left: 30, right: 30),
-                            child: divderrow()),
-                        sizeMaring(),
+                            child: divRow()),
+                        sizeMarking(),
                         AppButton(
                           buttonColor: ColorResource.blue,
                           buttonIcon: ImageResources.fackbookicon,
                           text: StringResources.Facebookname,
                         ),
-                        sizeMaring(),
+                        sizeMarking(),
                         AppButton(
                           buttonColor: ColorResource.black,
                           buttonIcon: ImageResources.appleicon,
                           text: StringResources.applename,
                         ),
-                        sizeMaring(),
+                        sizeMarking(),
                         Padding(
                           padding: const EdgeInsets.only(left: 70),
                           child: Row(
                             children: [
                               privacyText(
-                                  context, """Didn’t have an account?"""),
+                                  context, """Did n’t have an account?"""),
                               TextButton(
                                   onPressed: () {
                                     Navigator.pushReplacement(context,
@@ -179,7 +178,7 @@ class LoginPageState extends State<LoginPage> {
                             ],
                           ),
                         ),
-                        sizeMaring(),
+                        sizeMarking(),
                       ],
                     ),
                   ),

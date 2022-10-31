@@ -5,13 +5,13 @@ import 'package:ecommerce/common/constant/color_res.dart';
 import 'package:ecommerce/common/constant/image_res.dart';
 import 'package:ecommerce/common/constant/string_res.dart';
 import 'package:ecommerce/common/widget/common_navigator.dart';
-import 'package:ecommerce/common/widget/snackbar_widget.dart';
+import 'package:ecommerce/common/widget/snack_bar_widget.dart';
 import 'package:ecommerce/common/widget/text_form_field.dart';
 import 'package:ecommerce/model/login_model.dart';
 import 'package:ecommerce/model/look_prior_sign_up.dart';
 import 'package:ecommerce/rest_api/rest_services.dart';
-import 'package:ecommerce/screen/home_page/home_page.dart';
 import 'package:ecommerce/screen/login_page/login_page.dart';
+import 'package:ecommerce/screen/navigator_all_page/navigator_all_page.dart';
 import 'package:ecommerce/screen/register_page/register_page.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +33,7 @@ class RegisterPageViewModel {
     TextEditingController email,
     TextEditingController phoneNumber,
     TextEditingController password,
-    TextEditingController confiPassword,
+    TextEditingController confirmPassword,
     Country selectedDialogCountry,
     String mToken,
     String a,
@@ -51,18 +51,21 @@ class RegisterPageViewModel {
           password: password.text,
           deviceToken: mToken,
           deviceType: a);
-      String? signUserRespone = await RestServices.postRestMethods(
+      String? signUserResponse = await RestServices.postRestMethods(
           endpoints: RestServices.signApi, bodyParam: signMap.toJson());
-      if (signUserRespone != null && signUserRespone.isNotEmpty) {
-        Map<String, dynamic> signUserResponseMap = jsonDecode(signUserRespone);
+      if (signUserResponse != null && signUserResponse.isNotEmpty) {
+        Map<String, dynamic> signUserResponseMap = jsonDecode(signUserResponse);
         if (signUserResponseMap.containsKey('Success') &&
             signUserResponseMap['Success']) {
-          appSnackBar(context, text: "${signUserResponseMap['Message']}");
-          Navigator.pushAndRemoveUntil(
-            context,
-            CommonNavigator(child: LoginPage()),
-            (route) => false,
-          );
+          if (registerPageState.mounted) {
+            appSnackBar(registerPageState.context,
+                text: "${signUserResponseMap['Message']}");
+            Navigator.pushAndRemoveUntil(
+              context,
+              CommonNavigator(child: const LoginPage()),
+              (route) => false,
+            );
+          }
         } else {
           registerPageState.status = false;
           registerPageState.setState(() {
@@ -72,7 +75,6 @@ class RegisterPageViewModel {
       }
     } on SocketException catch (e) {
       log("Catch socket in signUpMethod --> ${e.message}");
-      log(e.message);
       registerPageState.setState(() {
         status = false;
       });
@@ -106,7 +108,7 @@ class RegisterPageViewModel {
         "osVersion": "10.11",
         "ViaSocial": 2
       };
-      print('LoginMap --> $googleLoginMap');
+      log('LoginMap --> $googleLoginMap');
       String? googleUserResponse = await RestServices.postRestMethods(
           endpoints: RestServices.googleApi, bodyParam: googleLoginMap);
       if (googleUserResponse != null && googleUserResponse.isNotEmpty) {
@@ -115,17 +117,22 @@ class RegisterPageViewModel {
         if (googleUserResponseMap.containsKey('Success') &&
             googleUserResponseMap['Success']) {
           LoginModel loginModel = loginModelFromJson(googleUserResponse);
-          print('Loginmmodel --> ${loginModel.toJson()}');
+          log('LoginModel --> ${loginModel.toJson()}');
 
           await shredPreference.setPrefStringValue(shredPreference.store,
               "${googleUserResponseMap['access_token']}");
 
-          appSnackBar(context, text: "${googleUserResponseMap['Message']}");
-          Navigator.pushAndRemoveUntil(
-            context,
-            CommonNavigator(child: HomePage()),
-            (route) => false,
-          );
+          if(registerPageState.mounted){
+            appSnackBar(context, text: "${googleUserResponseMap['Message']}");
+
+            Navigator.pushAndRemoveUntil(
+              context,
+              CommonNavigator(child: const NavigatorAllPage()),
+                  (route) => false,
+            );
+          }
+
+
         } else {
           registerPageState.status = false;
           registerPageState.setState(() {
@@ -143,13 +150,13 @@ class RegisterPageViewModel {
   }
 }
 
-Widget sizeMaring() {
+Widget sizeMarking() {
   return const SizedBox(
     height: 15,
   );
 }
 
-Widget divderrow() {
+Widget divRow() {
   return Row(
     children: const [
       SizedBox(
@@ -172,11 +179,11 @@ Widget divderrow() {
   );
 }
 
-Widget confmPasswordTextfFlied(TextEditingController confiPassword) {
+Widget confirmPasswordTextFlied(TextEditingController confirmPassword) {
   return AppTextField(
     obscureText: true,
     textInputType: TextInputType.visiblePassword,
-    textEditingController: confiPassword,
+    textEditingController: confirmPassword,
     validator: (value) {
       if (value!.isEmpty) {
         return 'Please enter Confirm Password.';
@@ -203,7 +210,7 @@ Widget confmPasswordTextfFlied(TextEditingController confiPassword) {
   );
 }
 
-Widget passwordTextfFlied(TextEditingController password) {
+Widget passwordTextFlied(TextEditingController password) {
   return AppTextField(
     obscureText: true,
     textInputType: TextInputType.visiblePassword,
@@ -234,7 +241,7 @@ Widget passwordTextfFlied(TextEditingController password) {
   );
 }
 
-Widget phonenumaberTextfFlied(TextEditingController phoneNumber) {
+Widget phoneNumberTextFlied(TextEditingController phoneNumber) {
   return AppTextField(
     textInputType: TextInputType.phone,
     textEditingController: phoneNumber,
@@ -272,7 +279,7 @@ Widget emailTextFiled(TextEditingController email) {
       if (value!.isEmpty ||
           !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
               .hasMatch(value)) {
-        return 'Please enter your email addresss.';
+        return 'Please enter your email address.';
       }
       return null;
     },

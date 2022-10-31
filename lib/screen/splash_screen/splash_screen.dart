@@ -5,6 +5,7 @@ import 'package:ecommerce/common/constant/image_res.dart';
 import 'package:ecommerce/common/constant/string_res.dart';
 import 'package:ecommerce/screen/home_page/home_page.dart';
 import 'package:ecommerce/screen/login_page/login_page.dart';
+import 'package:ecommerce/screen/navigator_all_page/navigator_all_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,7 +38,7 @@ class _SplashScrrenState extends State<SplashScrren> {
     Timer(const Duration(seconds: 3), () {
       if (login) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const HomePage()));
+            context, MaterialPageRoute(builder: (context) => const NavigatorAllPage()));
       } else {
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => const LoginPage()));

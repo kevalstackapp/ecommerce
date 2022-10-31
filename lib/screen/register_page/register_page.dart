@@ -30,7 +30,7 @@ class RegisterPageState extends State<RegisterPage> {
   TextEditingController email = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
   TextEditingController password = TextEditingController();
-  TextEditingController confiPassword = TextEditingController();
+  TextEditingController confirmPassword = TextEditingController();
   String a = "1";
   bool status = false;
   AuthService authService = AuthService();
@@ -89,7 +89,7 @@ class RegisterPageState extends State<RegisterPage> {
                 ),
               ]),
             ),
-            sizeMaring(),
+            sizeMarking(),
             Expanded(
               child: Container(
                   decoration: const BoxDecoration(
@@ -104,9 +104,9 @@ class RegisterPageState extends State<RegisterPage> {
                       child: ListView(
                         children: [
                           nameTextFiled(userName),
-                          sizeMaring(),
+                          sizeMarking(),
                           emailTextFiled(email),
-                          sizeMaring(),
+                          sizeMarking(),
                           Padding(
                             padding: const EdgeInsets.only(
                               left: 25,
@@ -134,41 +134,41 @@ class RegisterPageState extends State<RegisterPage> {
                                 ),
                                 Expanded(
                                   flex: 2,
-                                  child: phonenumaberTextfFlied(phoneNumber),
+                                  child: phoneNumberTextFlied(phoneNumber),
                                 ),
                               ],
                             ),
                           ),
-                          sizeMaring(),
-                          passwordTextfFlied(password),
-                          sizeMaring(),
-                          confmPasswordTextfFlied(confiPassword),
-                          sizeMaring(),
+                          sizeMarking(),
+                          passwordTextFlied(password),
+                          sizeMarking(),
+                          confirmPasswordTextFlied(confirmPassword),
+                          sizeMarking(),
                           CommonElevatedButton(
                             onPressed: () async {
                               submit();
 
-                              log("dfgdgfgfdgfkggkd++=====");
                             },
                             buttonColor: ColorResource.green,
                             text: StringResources.resisterbutton,
                             textColor: ColorResource.white,
                           ),
-                          sizeMaring(),
+                          sizeMarking(),
                           Padding(
                               padding:
                                   const EdgeInsets.only(left: 30, right: 30),
-                              child: divderrow()),
-                          sizeMaring(),
-                          AppButton(onTap: () async {
-                           await authService.facebookLogin();
-                         // log("login${abc!.message}");
-                          },
+                              child: divRow()),
+                          sizeMarking(),
+                          AppButton(
+                            onTap: () async {
+                              await authService.facebookLogin();
+                              // log("login${abc!.message}");
+                            },
                             buttonColor: ColorResource.blue,
                             buttonIcon: ImageResources.fackbookicon,
                             text: StringResources.Facebookname,
                           ),
-                          sizeMaring(),
+                          sizeMarking(),
                           AppButton(
                             onTap: () async {
                               final result = await authService.googleSign();
@@ -184,11 +184,11 @@ class RegisterPageState extends State<RegisterPage> {
                             buttonIcon: ImageResources.appleicon,
                             text: StringResources.applename,
                           ),
-                          sizeMaring(),
+                          sizeMarking(),
                           privacyText(context,
                               """  By Clicking on “Register with Facebook” or “Register” you Agree
-            To the Lookprior Terms of Service and Privacy Policy"""),
-                          sizeMaring(),
+            To the LookPrior Terms of Service and Privacy Policy"""),
+                          sizeMarking(),
                         ],
                       ),
                     ),
@@ -267,7 +267,7 @@ class RegisterPageState extends State<RegisterPage> {
             email,
             phoneNumber,
             password,
-            confiPassword,
+            confirmPassword,
             _selectedDialogCountry,
             RestServices.mToken,
             a,

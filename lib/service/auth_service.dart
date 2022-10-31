@@ -32,5 +32,6 @@ class AuthService {
       log("error-->$error");
       return null;
     }
+    return null;
   }
 }

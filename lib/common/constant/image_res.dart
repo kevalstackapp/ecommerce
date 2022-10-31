@@ -5,10 +5,12 @@ class ImageResources {
   static const floatingicon = 'asset/home_page_image/floating_icon/';
   static const locationicon = 'asset/home_page_image/location_icon/';
   static const categorypageicon = 'asset/category_page_icon/';
-  static const storageImg  = 'asset/storage_img/';
+  static const storageImg = 'asset/storage_img/';
+  static const profileIcon = 'asset/profile_icon/';
 
   static const splashscrrenLogo = 'asset/Screen Shot 2021-04-07 at 8.09 1.png';
   static const lookPrior = 'asset/Group 10219.svg';
+  static const userImage = 'asset/userimage.jpg';
 
   static const loginLogo = '${images}login_logo.png';
   static const youricon = '${images}User.svg';
@@ -52,6 +54,7 @@ class ImageResources {
   static const message = '${floatingicon}Message.svg';
   static const usericon = '${floatingicon}usericon.svg';
   static const editicon = '${locationicon}Edit.svg';
+  static const editWhiteIcon = '${locationicon}Editwhite.svg';
   static const Locationicon1 = '${locationicon}Locationicon1.svg';
   static const googlemap = '${locationicon}googkemap.png';
 
@@ -72,7 +75,7 @@ class ImageResources {
   static const books = '${categorypageicon}books.svg';
   static const chekicon = '${categorypageicon}chekicon.svg';
 
-  static const infomationicon= image + 'infomationicon.svg';
+  static const infomationicon = image + 'infomationicon.svg';
   static const videoicon = image + 'videoicon.svg';
   static const imageicon = image + 'imageicon.svg';
   static const ArrowRight = image + 'Arrow - Right.svg';
@@ -91,4 +94,10 @@ class ImageResources {
   static const greenBanner = storageImg + 'greenBanner.png';
   static const orangeBanner = storageImg + 'orangeBanner.png';
 
+  static const menu = '${profileIcon}menu.svg';
+  static const phone = '${profileIcon}phone.png';
+  static const cameraProfile = '${profileIcon}Groupcamare.png';
+  static const groupChat = '${profileIcon}Groupchat.png';
+  static const groupDollar = '${profileIcon}Groupdoller.png';
+  static const groupEdit= '${profileIcon}editIcon.png';
 }

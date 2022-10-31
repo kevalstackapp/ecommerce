@@ -84,12 +84,6 @@ List<String> iconimg = [
   (ImageResources.usericon)
 ];
 
-List<Widget> navigator = [
-  const HomePage(),
-  const LikePage(),
-  const MessagePage(),
-  const LoginPage(),
-];
 
 Future<void> showMyDialog(BuildContext context) async {
   return showDialog<void>(
@@ -153,6 +147,7 @@ Future<void> showMyDialog(BuildContext context) async {
 
 draweropen(BuildContext context) {
   return Drawer(
+
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
             topRight: Radius.circular(60), bottomRight: Radius.circular(60)),

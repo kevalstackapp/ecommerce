@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ShredPreference {
 
   String store = "";
+  String userId = "userId";
   String isLogin = "isLogin";
 
   checkPrefKey(String key) async {
@@ -53,5 +54,14 @@ class ShredPreference {
 log(String message) {
   if (kDebugMode) {
     print(message);
+  }
+}
+class Singleton {
+  static String? token;
+  static final Singleton _singleton = Singleton._internal();
+  Singleton._internal();
+
+  factory Singleton() {
+    return _singleton;
   }
 }

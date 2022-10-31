@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:ecommerce/common/widget/snackbar_widget.dart';
+import 'package:ecommerce/common/widget/snack_bar_widget.dart';
 import 'package:ecommerce/model/login_model.dart';
 import 'package:ecommerce/screen/home_page/home_page.dart';
+import 'package:ecommerce/screen/navigator_all_page/navigator_all_page.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:ecommerce/common/app/shred_preference.dart';
 import 'package:ecommerce/common/widget/common_navigator.dart';
@@ -37,26 +38,31 @@ class LoginPageViewModel {
         "mobileVersion": Platform.isAndroid ? 'Android' : 'IOS',
         "osVersion": "10.11"
       };
-      print('LoginMap --> $loginMap');
+      log('LoginMap --> $loginMap');
       String? loginUserResponse = await RestServices.postRestMethods(
           endpoints: RestServices.loginApi, bodyParam: loginMap);
+
       if (loginUserResponse != null && loginUserResponse.isNotEmpty) {
         Map<String, dynamic> loginUserResponseMap =
             jsonDecode(loginUserResponse);
         if (loginUserResponseMap.containsKey('Success') &&
             loginUserResponseMap['Success']) {
           LoginModel loginModel = loginModelFromJson(loginUserResponse);
-          print('Loginmmodel --> ${loginModel.toJson()}');
+          log('Loginmmodel --> ${loginModel.toJson()}');
 
           await shredPreference.setPrefStringValue(
               shredPreference.store, "${loginUserResponseMap['access_token']}");
+          shredPreference.setPrefBoolValue(shredPreference.isLogin, true);
 
-          appSnackBar(context, text: "${loginUserResponseMap['Message']}");
-          Navigator.pushAndRemoveUntil(
-            context,
-            CommonNavigator(child: HomePage()),
-            (route) => false,
-          );
+          if(loginPageState.mounted){
+            appSnackBar(context, text: "${loginUserResponseMap['Message']}");
+            Navigator.pushAndRemoveUntil(
+              context,
+              CommonNavigator(child: const NavigatorAllPage()),
+                  (route) => false,
+            );
+          }
+
         } else {
           loginPageState.status = false;
           loginPageState.setState(() {
@@ -74,6 +80,3 @@ class LoginPageViewModel {
   }
 }
 
-
-// today i have Google Sign in With out Firebase and Google Sign user credential values Api integration and Sign Up User.
-// fackbook login add fackbook developer console and flutter project contect.

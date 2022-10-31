@@ -28,7 +28,7 @@ class PostAddPageViewModel {
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: SizedBox(
-                height: 236,
+                height: 220,
                 child: Column(
                   children: [
                     ListTile(
@@ -68,7 +68,6 @@ class PostAddPageViewModel {
                           color: ColorResource.red,
                           textAlign: TextAlign.center,
                         )),
-                    const Divider(),
                   ],
                 ),
               ),
@@ -91,7 +90,7 @@ class PostAddPageViewModel {
         return StatefulBuilder(
           builder: (context, setState) {
             return SizedBox(
-              height: 236,
+              height: 220,
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Column(
@@ -133,7 +132,6 @@ class PostAddPageViewModel {
                           color: ColorResource.red,
                           textAlign: TextAlign.center,
                         )),
-                    const Divider(),
                   ],
                 ),
               ),
@@ -216,4 +214,3 @@ class PostAddPageViewModel {
     return fileName;
   }
 }
-
