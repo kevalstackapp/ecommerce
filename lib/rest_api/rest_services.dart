@@ -17,7 +17,8 @@ class RestServices {
   static String changePasswordApi = "api/v1/data/changepassword";
   static String logoutApi = "api/v1/data/logout?userId=";
   static String updateProfileApi = "api/v1/data/updateprofile";
-  static String profileImage = baseUrl + "api/v1/data/saveprofileimage";
+  static String profileImage = "${baseUrl}api/v1/data/saveprofileimage";
+  static String postAddImageSave = "api/v1/detail/saveadimages?addDetailId=";
 
 
   static Map<String, String> headers = {'Content-Type': 'application/json'};

@@ -47,16 +47,13 @@ class ChangePasswordViewModel {
             jsonDecode(changePasswordResponse);
         if (changePasswordResponseMap.containsKey('Success') &&
             changePasswordResponseMap['Success']) {
-
-            appSnackBar(changePasswordPageState!.context, text: "${changePasswordResponseMap['Message']}");
-            Navigator.pushAndRemoveUntil(
-              changePasswordPageState!.context,
-              CommonNavigator(child: const UserProfilePage()),
-                  (route) => false,
-            );
-
-
-
+          appSnackBar(changePasswordPageState!.context,
+              text: "${changePasswordResponseMap['Message']}");
+          Navigator.pushAndRemoveUntil(
+            changePasswordPageState!.context,
+            CommonNavigator(child: const UserProfilePage()),
+            (route) => false,
+          );
         } else {
           changePasswordPageState!.status = false;
           changePasswordPageState!.setState(() {});

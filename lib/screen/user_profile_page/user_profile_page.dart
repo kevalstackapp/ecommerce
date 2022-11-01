@@ -39,9 +39,9 @@ class UserProfilePageState extends State<UserProfilePage> {
     GetProfileModel? data = userProfileViewModel!.getProfileModel;
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
-        statusBarColor: ColorResource.green,
-        statusBarIconBrightness: Brightness.light,
-      ),
+          statusBarColor: ColorResource.green,
+          statusBarIconBrightness: Brightness.light,
+          systemNavigationBarColor: Colors.white),
     );
 
     return Scaffold(
@@ -124,6 +124,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                       const SizedBox(
                         height: 50,
                       ),
+
                       data == null
                           ? const Text("")
                           : Padding(
@@ -192,6 +193,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                           width: double.infinity,
                           child: Card(
                             child: Column(children: [
+
                               const Padding(
                                 padding: EdgeInsets.only(top: 10),
                                 child: CommonText(

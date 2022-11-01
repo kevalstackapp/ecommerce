@@ -4,6 +4,7 @@ import 'package:ecommerce/common/constant/string_res.dart';
 import 'package:ecommerce/common/widget/common_text.dart';
 import 'package:ecommerce/screen/home_page/widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class LikePage extends StatefulWidget {
@@ -18,11 +19,12 @@ class LikePage extends StatefulWidget {
 class _LikePageState extends State<LikePage> {
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: ColorResource.green,
       resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(60), // here the desired height
+        preferredSize: const Size.fromHeight(60),
         child: AppBar(
           backgroundColor: ColorResource.green,
           elevation: 0,

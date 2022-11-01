@@ -10,13 +10,13 @@ class PostAdDetailModel {
   }
 
  static Widget amountTextFiled() {
-    return CommonTextField(
+    return CommonTextField(textInputType: TextInputType.number,
       hintText: StringResources.amount1,
     );
   }
 
  static Widget descriptionTextFiled() {
-    return CommonTextField(
+    return CommonTextField(maxLines: 6,
       hintText: StringResources.description,
     );
   }

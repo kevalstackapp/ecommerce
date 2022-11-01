@@ -29,9 +29,9 @@ class ChangePasswordPageState extends State<ChangePasswordPage> {
         (changePasswordViewModel = (ChangePasswordViewModel(this)));
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
-        statusBarColor: ColorResource.green,
-        statusBarIconBrightness: Brightness.light,
-      ),
+          statusBarColor: ColorResource.green,
+          statusBarIconBrightness: Brightness.light,
+          systemNavigationBarColor: Colors.white),
     );
     return Scaffold(
       resizeToAvoidBottomInset: false,

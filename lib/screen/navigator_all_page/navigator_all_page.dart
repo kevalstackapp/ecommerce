@@ -8,6 +8,7 @@ import 'package:ecommerce/screen/message_page/message_page.dart';
 import 'package:ecommerce/screen/post_add_page/post_add_page.dart';
 import 'package:ecommerce/screen/user_profile_page/user_profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class NavigatorAllPage extends StatefulWidget {
@@ -38,6 +39,7 @@ class _NavigatorAllPageState extends State<NavigatorAllPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         key: scaffoldKey,
         resizeToAvoidBottomInset: false,

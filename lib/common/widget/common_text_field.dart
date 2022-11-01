@@ -14,6 +14,8 @@ class CommonTextField extends StatelessWidget {
   bool obscureText = false;
   final double? fontSize;
   final FontWeight? fontWeight;
+  int? maxLines = 1;
+  int? maxLength;
 
   CommonTextField(
       {super.key,
@@ -27,7 +29,7 @@ class CommonTextField extends StatelessWidget {
       this.validator,
       this.onFieldSubmitted,
       this.fontSize,
-      this.fontWeight});
+      this.fontWeight,this.maxLines,this.maxLength});
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,8 @@ class CommonTextField extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: 15, right: 15),
         child: TextFormField(
+          maxLines: maxLines,
+          maxLength: maxLength,
           onFieldSubmitted: onFieldSubmitted,
           keyboardType: textInputType,
           controller: textEditingController,
@@ -44,7 +48,7 @@ class CommonTextField extends StatelessWidget {
             focusedBorder: OutlineInputBorder(
                 borderSide: const BorderSide(color: ColorResource.green),
                 borderRadius: BorderRadius.circular(10)),
-            contentPadding: const EdgeInsets.only(top: 5,left: 15),
+            contentPadding: const EdgeInsets.only(top: 5, left: 15),
             hintText: hintText,
             prefixIcon: prefixIcon,
             hintStyle: GoogleFonts.poppins(

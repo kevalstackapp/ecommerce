@@ -201,4 +201,11 @@ your listing.""";
 
   static const saved = 'Saved';
 
+  static const selectCategory = 'Select Category';
+  static const selectSubCategory = 'Select SubCategory';
+  static const selectSuSubcategory = 'Select Su-Subcategory';
+  static const selectLocation = 'Select Location';
+  static const postAd = 'Post Ad';
+
+
 }

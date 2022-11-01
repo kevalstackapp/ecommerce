@@ -28,7 +28,7 @@ class PostAddPageViewModel {
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: SizedBox(
-                height: 220,
+                height: 200,
                 child: Column(
                   children: [
                     ListTile(
@@ -213,4 +213,8 @@ class PostAddPageViewModel {
     );
     return fileName;
   }
+
+
+
+
 }

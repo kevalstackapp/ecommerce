@@ -60,6 +60,7 @@ class UserEditPageState extends State<UserEditPage> {
   @override
   Widget build(BuildContext context) {
     userEditViewModel ?? (userEditViewModel = UserEditViewModel(this));
+
     return Scaffold(
       backgroundColor: ColorResource.green,
       appBar: PreferredSize(

@@ -8,7 +8,7 @@ import 'package:ecommerce/common/widget/common_text.dart';
 import 'package:ecommerce/common/widget/elevated_button.dart';
 import 'package:ecommerce/screen/post_add_page/post_ad_details_page/post_ad_details_page.dart';
 import 'package:ecommerce/screen/post_add_page/storage_page/storage_page.dart';
-import 'package:ecommerce/screen/post_add_page/widget.dart';
+import 'package:ecommerce/screen/post_add_page/post_add_page_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
@@ -50,13 +50,16 @@ class PostAddPageState extends State<PostAddPage> {
                         color: ColorResource.white,
                       )),
                   const SizedBox(
-                    width: 50,
+                    width: 60,
                   ),
-                  const CommonText(
-                    text: StringResources.PostyourAd,
-                    color: ColorResource.white,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 20,
+                  const Padding(
+                    padding:  EdgeInsets.only(top: 5),
+                    child: CommonText(
+                      text: StringResources.PostyourAd,
+                      color: ColorResource.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 20,
+                    ),
                   )
                 ],
               )),

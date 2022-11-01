@@ -25,19 +25,20 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 2), () {
       showMyDialog(context);
     });
   }
+
   ShredPreference shredPreference = ShredPreference();
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
-        statusBarColor: ColorResource.green,
-        statusBarIconBrightness: Brightness.light,
-      ),
+          statusBarColor: ColorResource.green,
+          statusBarIconBrightness: Brightness.light,
+          systemNavigationBarColor: Colors.white),
     );
 
     return Scaffold(
