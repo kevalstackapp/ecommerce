@@ -119,8 +119,6 @@ class UserEditViewModel {
       http.StreamedResponse r = await request.send();
       log("${r.statusCode}");
       log("reasonPhrase${r.reasonPhrase}");
-      //log("reasonPhrase${r}");
-
 
     } on PlatformException catch (e) {
       log('PlatformException in postRestCall --> ${e.message}');

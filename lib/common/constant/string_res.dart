@@ -206,6 +206,7 @@ your listing.""";
   static const selectSuSubcategory = 'Select Su-Subcategory';
   static const selectLocation = 'Select Location';
   static const postAd = 'Post Ad';
+  static const postToast  = 'Please add at least  one media file';
 
 
 }

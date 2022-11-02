@@ -19,6 +19,7 @@ class RestServices {
   static String updateProfileApi = "api/v1/data/updateprofile";
   static String profileImage = "${baseUrl}api/v1/data/saveprofileimage";
   static String postAddImageSave = "api/v1/detail/saveadimages?addDetailId=";
+  static String postAdDetailApi = "$baseUrl/api/v1/detail/AddOrUpdateAd2";
 
 
   static Map<String, String> headers = {'Content-Type': 'application/json'};

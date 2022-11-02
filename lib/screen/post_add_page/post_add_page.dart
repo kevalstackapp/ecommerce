@@ -10,7 +10,9 @@ import 'package:ecommerce/screen/post_add_page/post_ad_details_page/post_ad_deta
 import 'package:ecommerce/screen/post_add_page/storage_page/storage_page.dart';
 import 'package:ecommerce/screen/post_add_page/post_add_page_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
 
@@ -23,11 +25,11 @@ class PostAddPage extends StatefulWidget {
 
 class PostAddPageState extends State<PostAddPage> {
   PostAddPageViewModel? postAddPageViewModel;
-  List<XFile> imgpath = [];
-
+  List<XFile> imgPath = [];
+  Uint8List? bytesImgPath;
   late VideoPlayerController controller;
 
-  List<String> videopath = [];
+  List<String> videoPath = [];
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +55,7 @@ class PostAddPageState extends State<PostAddPage> {
                     width: 60,
                   ),
                   const Padding(
-                    padding:  EdgeInsets.only(top: 5),
+                    padding: EdgeInsets.only(top: 5),
                     child: CommonText(
                       text: StringResources.PostyourAd,
                       color: ColorResource.white,
@@ -145,7 +147,7 @@ class PostAddPageState extends State<PostAddPage> {
                                 height: 100,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: videopath.length,
+                                  itemCount: videoPath.length,
                                   itemBuilder: (context, index) {
                                     return Row(
                                       children: [
@@ -162,7 +164,7 @@ class PostAddPageState extends State<PostAddPage> {
                                                         context,
                                                         CommonNavigator(
                                                             child: AppVideoPlayer(
-                                                                videopath[
+                                                                videoPath[
                                                                     index])));
                                                   },
                                                   child: Container(
@@ -198,7 +200,7 @@ class PostAddPageState extends State<PostAddPage> {
                                           IconButton(
                                               onPressed: () {
                                                 setState(() {
-                                                  videopath.removeAt(index);
+                                                  videoPath.removeAt(index);
                                                 });
                                               },
                                               icon: SvgPicture.asset(
@@ -285,7 +287,7 @@ class PostAddPageState extends State<PostAddPage> {
                                 height: 109,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: imgpath.length,
+                                  itemCount: imgPath.length,
                                   itemBuilder: (context, index) {
                                     return Container(
                                         alignment: Alignment.topRight,
@@ -299,12 +301,12 @@ class PostAddPageState extends State<PostAddPage> {
                                                     Radius.circular(5)),
                                             image: DecorationImage(
                                                 image: FileImage(
-                                                    File(imgpath[index].path)),
+                                                    File(imgPath[index].path)),
                                                 fit: BoxFit.fill)),
                                         child: IconButton(
                                             onPressed: () {
                                               setState(() {
-                                                imgpath.removeAt(index);
+                                                imgPath.removeAt(index);
                                               });
                                             },
                                             icon: SvgPicture.asset(
@@ -360,9 +362,20 @@ class PostAddPageState extends State<PostAddPage> {
               ),
               CommonElevatedButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      CommonNavigator(child: const PostAdDetailsPage()));
-                  setState(() {});
+                  if (videoPath.isEmpty && imgPath.isEmpty) {
+                    Fluttertoast.showToast(
+                        msg: StringResources.postToast,
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: ColorResource.green,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                  } else {
+                    Navigator.push(context,
+                        CommonNavigator(child:  PostAdDetailsPage(imgPath,videoPath)));
+                    setState(() {});
+                  }
                 },
                 buttonColor: ColorResource.green,
                 textSize: 16,

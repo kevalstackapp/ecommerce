@@ -16,7 +16,7 @@ class CommonTextField extends StatelessWidget {
   final FontWeight? fontWeight;
   int? maxLines = 1;
   int? maxLength;
-
+  final String? errorText;
   CommonTextField(
       {super.key,
       this.lable,
@@ -29,7 +29,7 @@ class CommonTextField extends StatelessWidget {
       this.validator,
       this.onFieldSubmitted,
       this.fontSize,
-      this.fontWeight,this.maxLines,this.maxLength});
+      this.fontWeight,this.maxLines,this.maxLength, this.errorText});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class CommonTextField extends StatelessWidget {
           controller: textEditingController,
           validator: validator,
           obscureText: obscureText,
-          decoration: InputDecoration(
+          decoration: InputDecoration(errorText: errorText,
             focusedBorder: OutlineInputBorder(
                 borderSide: const BorderSide(color: ColorResource.green),
                 borderRadius: BorderRadius.circular(10)),

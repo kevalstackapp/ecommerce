@@ -169,7 +169,8 @@ class PostAddPageViewModel {
     try {
       XFile? image = await ImagePicker().pickImage(source: imageSource);
       if (image == null) return;
-      postAddPageState.imgpath.add(image);
+      postAddPageState.imgPath.add(image);
+      postAddPageState.bytesImgPath = await image.readAsBytes();
       postAddPageState.setState(() {});
     } on PlatformException catch (e) {
       if (kDebugMode) {
@@ -182,7 +183,7 @@ class PostAddPageViewModel {
     try {
       List<XFile> image = await ImagePicker().pickMultiImage();
       if (image == null) return;
-      postAddPageState.imgpath.addAll(image);
+      postAddPageState.imgPath.addAll(image);
       postAddPageState.setState(() {});
     } on PlatformException catch (e) {
       if (kDebugMode) {
@@ -196,7 +197,7 @@ class PostAddPageViewModel {
       XFile? video = await ImagePicker().pickVideo(
           source: imageSource, maxDuration: const Duration(seconds: 10));
       if (video == null) return;
-      postAddPageState.videopath.add(video.path);
+      postAddPageState.videoPath.add(video.path);
       postAddPageState.setState(() {});
     } on PlatformException catch (e) {
       if (kDebugMode) {
@@ -208,7 +209,7 @@ class PostAddPageViewModel {
   Future<String?> videoThumbnail(int index) async {
     final fileName = await VideoThumbnail.thumbnailFile(
       imageFormat: ImageFormat.JPEG,
-      video: postAddPageState.videopath[index],
+      video: postAddPageState.videoPath[index],
       quality: 5,
     );
     return fileName;

@@ -217,7 +217,7 @@ Widget passwordTextFlied(TextEditingController password) {
     textEditingController: password,
     validator: (value) {
       if (value!.isEmpty) {
-        return 'Please enter Password.';
+        return 'Please enter Password. ';
       }
       return null;
     },
