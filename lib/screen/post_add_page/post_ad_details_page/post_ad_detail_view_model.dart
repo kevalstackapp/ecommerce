@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:ecommerce/common/app/shred_preference.dart';
 import 'package:ecommerce/common/constant/string_res.dart';
+import 'package:ecommerce/common/widget/common_navigator.dart';
 import 'package:ecommerce/common/widget/common_text_field.dart';
 import 'package:ecommerce/common/widget/snack_bar_widget.dart';
 import 'package:ecommerce/rest_api/rest_services.dart';
+import 'package:ecommerce/screen/navigator_all_page/navigator_all_page.dart';
 import 'package:ecommerce/screen/post_add_page/post_ad_details_page/post_ad_details_page.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -18,7 +20,8 @@ class PostAdDetailViewModel {
   String token = "";
   bool status = false;
 
-  Future<String?>? postAdDetailMethod() async {
+
+  Future<String?>? postAdDetailMethod(BuildContext context) async {
     token = (await shredPreference.getPrefStringValue(shredPreference.store))!;
     try {
       postAdDetailsPageState.setState(() {
@@ -85,6 +88,8 @@ class PostAdDetailViewModel {
           });
           appSnackBar(postAdDetailsPageState.context,
               text: '${responseMap['Message']}');
+          Navigator.pushReplacement(
+              context, CommonNavigator(child: const NavigatorAllPage()));
         }
       } else {
         if (postAdDetailsPageState.mounted) {
@@ -106,7 +111,6 @@ class PostAdDetailViewModel {
 
   Widget titleTextFiled() {
     return CommonTextField(
-
       textEditingController: postAdDetailsPageState.titleController,
       hintText: StringResources.title,
     );
@@ -114,7 +118,6 @@ class PostAdDetailViewModel {
 
   Widget amountTextFiled() {
     return CommonTextField(
-
       textEditingController: postAdDetailsPageState.amountController,
       textInputType: TextInputType.number,
       hintText: StringResources.amount1,

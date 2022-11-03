@@ -131,8 +131,6 @@ class RegisterPageViewModel {
                   (route) => false,
             );
           }
-
-
         } else {
           registerPageState.status = false;
           registerPageState.setState(() {

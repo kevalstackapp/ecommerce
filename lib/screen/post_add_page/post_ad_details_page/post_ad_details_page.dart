@@ -371,7 +371,7 @@ class PostAdDetailsPageState extends State<PostAdDetailsPage> {
                             textColor: Colors.white,
                             fontSize: 16.0);
                       } else {
-                        await postAdDetailViewModel!.postAdDetailMethod();
+                        await postAdDetailViewModel!.postAdDetailMethod(context);
 
                       }
                     },

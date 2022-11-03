@@ -114,12 +114,10 @@ class UserEditViewModel {
       request.files.add(http.MultipartFile.fromBytes(
           'file', userEditPageState!.bytesImgPath!.toList(),
           filename: userEditPageState!.imgPath));
-      userEditPageState!.setState(() {
-      });
+      userEditPageState!.setState(() {});
       http.StreamedResponse r = await request.send();
       log("${r.statusCode}");
       log("reasonPhrase${r.reasonPhrase}");
-
     } on PlatformException catch (e) {
       log('PlatformException in postRestCall --> ${e.message}');
     }
@@ -236,7 +234,7 @@ class UserEditViewModel {
     );
   }
 
-  imgMethod(ImageSource imageSource) async {
+  imgMethod(ImageSource imageSource)async {
     try {
       XFile? image = await ImagePicker().pickImage(source: imageSource);
       if (image == null) return;
@@ -248,3 +246,5 @@ class UserEditViewModel {
     }
   }
 }
+
+// Today I have work to post Add Page  Ad With Image/video Api integration.user Profile page in PostAds data get but data display not complete.
