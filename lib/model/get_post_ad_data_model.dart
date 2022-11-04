@@ -128,10 +128,10 @@ class FilteredAddList {
   SubCategoryName? subCategoryName;
 
   factory FilteredAddList.fromJson(Map<String, dynamic> json) => FilteredAddList(
-    broadCastId: json["BroadCastId"] == null ? null : json["BroadCastId"],
+    broadCastId: json["BroadCastId"],
     userId: json["UserId"],
     adDetailId: json["AdDetailId"],
-    title: json["Title"] == null ? null : json["Title"],
+    title: json["Title"],
     fullAddress: json["FullAddress"] == null ? null : fullAddressValues.map![json["FullAddress"]],
     state: json["State"] == null ? null : stateValues.map![json["State"]],
     city: json["City"] == null ? null : cityValues.map![json["City"]],
@@ -146,7 +146,7 @@ class FilteredAddList {
     isLiked: json["IsLiked"],
     isFavAd: json["IsFavAd"],
     noOfViews: json["NoOfViews"],
-    description: json["Description"] == null ? null : json["Description"],
+    description: json["Description"] ?? null,
     isOwner: json["IsOwner"],
     isTopAdd: json["IsTopAdd"],
     isMyAd: json["IsMyAd"],
@@ -168,10 +168,10 @@ class FilteredAddList {
   );
 
   Map<String, dynamic> toJson() => {
-    "BroadCastId": broadCastId == null ? null : broadCastId,
+    "BroadCastId": broadCastId ?? null,
     "UserId": userId,
     "AdDetailId": adDetailId,
-    "Title": title == null ? null : title,
+    "Title": title ?? null,
     "FullAddress": fullAddress == null ? null : fullAddressValues.reverse![fullAddress],
     "State": state == null ? null : stateValues.reverse![state],
     "City": city == null ? null : cityValues.reverse![city],
@@ -186,7 +186,7 @@ class FilteredAddList {
     "IsLiked": isLiked,
     "IsFavAd": isFavAd,
     "NoOfViews": noOfViews,
-    "Description": description == null ? null : description,
+    "Description": description ?? null,
     "IsOwner": isOwner,
     "IsTopAdd": isTopAdd,
     "IsMyAd": isMyAd,
@@ -195,8 +195,8 @@ class FilteredAddList {
     "IsDeleted": isDeleted,
     "IsReviewed": isReviewed,
     "IsApproved": isApproved,
-    "Latitude": latitude == null ? null : latitude,
-    "Longitude": longitude == null ? null : longitude,
+    "Latitude": latitude ?? null,
+    "Longitude": longitude ?? null,
     "TotalExposureDays": totalExposureDays,
     "PerDayExposurePrice": perDayExposurePrice,
     "IsFeatureAd": isFeatureAd,

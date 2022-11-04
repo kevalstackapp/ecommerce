@@ -63,13 +63,13 @@ class PostAdDetailViewModel {
 
       for (var i = 0; i < postAdDetailsPageState.widget.imgPath.length; i++) {
         request.files.add(await http.MultipartFile.fromPath(
-            'adImageList[0]', postAdDetailsPageState.widget.imgPath[i].path));
+            'adImageList[$i]', postAdDetailsPageState.widget.imgPath[i].path));
         log("imgPath${postAdDetailsPageState.widget.imgPath[i].path}");
       }
 
       for (var i = 0; i < postAdDetailsPageState.widget.videoPath.length; i++) {
         request.files.add(await http.MultipartFile.fromPath(
-            'adVideoList[0].adVideo',
+            'adVideoList[$i].adVideo',
             postAdDetailsPageState.widget.videoPath[i]));
         log("imgPath${postAdDetailsPageState.widget.videoPath[i]}");
       }
@@ -89,7 +89,7 @@ class PostAdDetailViewModel {
           appSnackBar(postAdDetailsPageState.context,
               text: '${responseMap['Message']}');
           Navigator.pushReplacement(
-              context, CommonNavigator(child: const NavigatorAllPage()));
+              context, CommonNavigator(child: const NavigatorAllPage(index: 3)));
         }
       } else {
         if (postAdDetailsPageState.mounted) {

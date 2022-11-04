@@ -5,6 +5,7 @@ import 'package:ecommerce/common/constant/string_res.dart';
 import 'package:ecommerce/common/widget/common_navigator.dart';
 import 'package:ecommerce/common/widget/common_text.dart';
 import 'package:ecommerce/model/get_profile_model.dart';
+import 'package:ecommerce/screen/user_profile_page/post_view_data/post_view_data.dart';
 import 'package:ecommerce/screen/user_profile_page/user_edit_page/user_edit_page.dart';
 import 'package:ecommerce/screen/user_profile_page/user_profile_view_model.dart';
 import 'package:ecommerce/screen/user_profile_page/widget.dart';
@@ -29,8 +30,9 @@ class UserProfilePageState extends State<UserProfilePage> {
   UserProfileViewModel? userProfileViewModel;
   ShredPreference shredPreference = ShredPreference();
   bool isLoading = false;
-  ScrollController scrollController = ScrollController();
   bool dataLoading = false;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class UserProfilePageState extends State<UserProfilePage> {
         (userProfileViewModel = (UserProfileViewModel(this)));
 
     GetProfileModel? data = userProfileViewModel!.getProfileModel;
-    var getData = userProfileViewModel!.getPostAdModelData;
+
 
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
@@ -287,116 +289,197 @@ class UserProfilePageState extends State<UserProfilePage> {
                                             shrinkWrap: true,
                                             physics:
                                                 const ClampingScrollPhysics(),
-                                            controller: scrollController,
                                             itemBuilder: (context, index) {
+                                              var showData = userProfileViewModel!.getPostAdModelData!
+                                                  .filteredAddList![index];
                                               return Card(
                                                 margin: const EdgeInsets.only(
-                                                    top: 20,
+                                                    top: 18,
                                                     left: 15,
                                                     right: 15),
                                                 elevation: 1.5,
-                                                child: Container(
-                                                  height: 75,
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          5))),
-                                                  child: Row(
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .symmetric(
-                                                                horizontal: 10),
-                                                        child: Container(
-                                                          height: 55,
-                                                          width: 55,
-                                                          decoration: const BoxDecoration(
-                                                              color:
-                                                                  Colors.grey,
-                                                              borderRadius: BorderRadius
-                                                                  .all(Radius
-                                                                      .circular(
-                                                                          5))),
-                                                        ),
-                                                      ),
-                                                      Column(
-                                                        children: const [
-                                                          Padding(
-                                                            padding: EdgeInsets.only(top: 10),
-                                                            child: Text("12133"),
-                                                          ),
-                                                          Padding(
-                                                            padding: EdgeInsets.only(top: 3),
-                                                            child: Text("12344"),
-                                                          ),
-                                                          Padding(
-                                                            padding: EdgeInsets.only(top: 3),
-                                                            child: Text("12343"),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      const Spacer(),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                right: 10),
-                                                        child: Container(
-                                                          height: 27,
-                                                          alignment:
-                                                              Alignment.center,
-                                                          decoration: BoxDecoration(
-                                                              color: Colors.grey
-                                                                  .shade400,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          6)),
+                                                child: InkWell(onTap: () {
+                                                  Navigator.push(context, CommonNavigator(child:PostViewData(showData)));
+                                                },
+                                                  child: Container(
+                                                    height: 91,
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius.all(
+                                                                    Radius
+                                                                        .circular(
+                                                                            5))),
+                                                    child: Row(
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .symmetric(
+                                                                  horizontal: 10),
                                                           child: Container(
-                                                              alignment:
-                                                                  Alignment
-                                                                      .center,
-                                                              width: 90,
-                                                              child: SvgPicture
-                                                                  .asset(
-                                                                ImageResources
-                                                                    .share,
-                                                                height: 40,
-                                                              )),
+                                                            height: 64,
+                                                            width: 67,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                                    color: Colors
+                                                                        .grey,
+                                                                    image: showData
+                                                                            .adImageThumb!
+                                                                            .isNotEmpty
+                                                                        ? DecorationImage(
+                                                                            image: NetworkImage(
+                                                                                "${showData.adImageThumb}"),
+                                                                            fit: BoxFit
+                                                                                .fill)
+                                                                        : DecorationImage(
+                                                                            image:
+                                                                                NetworkImage("${showData.adVideoThumb}"),
+                                                                            fit: BoxFit
+                                                                                .fill,
+                                                                          ),
+                                                                    borderRadius: const BorderRadius
+                                                                            .all(
+                                                                        Radius.circular(
+                                                                            5))),
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                        Column(
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      top: 13.5),
+                                                              child: SizedBox(
+                                                                width: 100,
+                                                                child: CommonText(
+                                                                  text:
+                                                                      "${showData.title}",
+                                                                  color:
+                                                                      ColorResource
+                                                                          .black,
+                                                                  fontSize: 13,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      top: 3),
+                                                              child: SizedBox(
+                                                                width: 100,
+                                                                child: CommonText(
+                                                                  text:
+                                                                      "Rs.${showData.amount}",
+                                                                  color:
+                                                                      ColorResource
+                                                                          .black,
+                                                                  fontSize: 13,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      top: 3),
+                                                              child: SizedBox(
+                                                                width: 100,
+                                                                child: CommonText(
+                                                                  text:
+                                                                      "${showData.fullAddress}",
+                                                                  color:
+                                                                      ColorResource
+                                                                          .black,
+                                                                  fontSize: 13,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        const Spacer(),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  right: 10),
+                                                          child: Container(
+                                                            height: 27,
+                                                            alignment:
+                                                                Alignment.center,
+                                                            decoration: BoxDecoration(
+                                                                color: Colors.grey
+                                                                    .shade400,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            6)),
+                                                            child: Container(
+                                                                alignment:
+                                                                    Alignment
+                                                                        .center,
+                                                                width: 90,
+                                                                child: SvgPicture
+                                                                    .asset(
+                                                                  ImageResources
+                                                                      .share,
+                                                                  height: 40,
+                                                                )),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                               );
                                             },
-                                            itemCount: getData!
+                                            itemCount:userProfileViewModel!.getPostAdModelData!
                                                 .filteredAddList!.length,
                                           ),
                                           dataLoading
-                                              ? const CircularProgressIndicator(
-                                                  color: ColorResource.green,
+                                              ? const Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    color: ColorResource.green,
+                                                  ),
                                                 )
-                                              : const Text(""),
-                                          ElevatedButton(
-                                              onPressed: () async {
-                                                dataLoading = true;
-                                                setState(() {});
-                                                userProfileViewModel!.pageNo =
+                                              : TextButton(
+                                                  onPressed: () {
+                                                    dataLoading = true;
+                                                    setState(() {});
                                                     userProfileViewModel!
-                                                            .pageNo +
-                                                        10;
-                                                userProfileViewModel!
-                                                    .getPostAdDetailsMethod()
-                                                    .then((value) {
-                                                  dataLoading = false;
-                                                });
-                                              },
-                                              child: const Text("More Post"))
+                                                            .pageNo =
+                                                        userProfileViewModel!
+                                                                .pageNo +
+                                                            10;
+                                                    userProfileViewModel!
+                                                        .getPostAdDetailsMethod()
+                                                        .then((value) {
+                                                      dataLoading = false;
+                                                    });
+                                                  },
+                                                  child: const CommonText(
+                                                    text:
+                                                        StringResources.viewAll,
+                                                    fontSize: 14,
+                                                    color: ColorResource.green,
+                                                    fontWeight: FontWeight.w500,
+                                                  )),
+                                          const SizedBox(
+                                            height: 10,
+                                          )
                                         ],
                                       ),
                               ),
@@ -443,16 +526,5 @@ class UserProfilePageState extends State<UserProfilePage> {
     );
   }
 
-  createListView(List itemList) {
-    scrollController.addListener(() {
-      if (scrollController.position.maxScrollExtent ==
-          scrollController.position.pixels) {
-        if (!isLoading) {
-          isLoading = !isLoading;
-          // Perform event when user reach at the end of list (e.g. do Api call)
-          userProfileViewModel!.getPostAdDetailsMethod();
-        }
-      }
-    });
-  }
+
 }

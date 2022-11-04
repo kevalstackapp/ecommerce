@@ -11,6 +11,7 @@ class ImageResources {
   static const splashscrrenLogo = 'asset/Screen Shot 2021-04-07 at 8.09 1.png';
   static const lookPrior = 'asset/Group 10219.svg';
   static const userImage = 'asset/userimage.jpg';
+  static const similarAdsImg = 'asset/slimiarAdsImg.png';
 
   static const loginLogo = '${images}login_logo.png';
   static const youricon = '${images}User.svg';

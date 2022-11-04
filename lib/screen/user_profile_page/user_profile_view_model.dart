@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:ecommerce/common/app/shred_preference.dart';
 import 'package:ecommerce/common/widget/snack_bar_widget.dart';
 import 'package:ecommerce/model/get_post_ad_data_model.dart';
@@ -27,12 +26,12 @@ class UserProfileViewModel {
     try {
       token =
           (await shredPreference.getPrefStringValue(shredPreference.store))!;
-      String? getProfileUserRespone = await RestServices.getRestMethods(
+      String? getProfileUserResponse = await RestServices.getRestMethods(
           endpoints: RestServices.getProfileApi,
           headers: {'Authorization': 'Bearer $token'});
       log("token-->$token");
-      if (getProfileUserRespone != null && getProfileUserRespone.isNotEmpty) {
-        getProfileModel = getProfileModelFromJson(getProfileUserRespone);
+      if (getProfileUserResponse != null && getProfileUserResponse.isNotEmpty) {
+        getProfileModel = getProfileModelFromJson(getProfileUserResponse);
         if (getProfileModel!.success == true) {
           userProfilePageState!.setState(() {});
         } else {}
@@ -46,7 +45,7 @@ class UserProfileViewModel {
     return null;
   }
 
-  Future<GetPostAdDataModel?> getPostAdDetailsMethod() async {
+   getPostAdDetailsMethod() async {
     token = (await shredPreference.getPrefStringValue(shredPreference.store))!;
 
     try {
@@ -92,6 +91,5 @@ class UserProfileViewModel {
         status = false;
       });
     }
-    return null;
   }
 }

@@ -21,6 +21,7 @@ class RestServices {
   static String postAddImageSave = "api/v1/detail/saveadimages?addDetailId=";
   static String postAdDetailApi = "$baseUrl/api/v1/detail/AddOrUpdateAd2";
   static String postAdDetailGetDataApi = "/api/v1/detail/getmyadds";
+  static String broadCastApi = "/api/v1/detail/getbroadcastdetailnew?broadCastId=";
 
 
   static Map<String, String> headers = {'Content-Type': 'application/json'};

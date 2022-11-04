@@ -208,5 +208,11 @@ your listing.""";
   static const postAd = 'Post Ad';
   static const postToast  = 'Please add at least  one media file';
 
+  static const viewAll = 'View all';
+  static const images = 'Images';
+  static const postDetail = """Send people directly to your website for only 
+\$0.99. Go for it""";
+  static const similarAds = 'Similar Ads';
+
 
 }
