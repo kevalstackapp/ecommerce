@@ -93,18 +93,19 @@ class PostAdDetailViewModel {
         }
       } else {
         if (postAdDetailsPageState.mounted) {
+          status = false;
           appSnackBar(postAdDetailsPageState.context,
               text: '${responseMap['Message']}');
+
+          postAdDetailsPageState.setState(() {
+          });
         }
-        postAdDetailsPageState.setState(() {
-          status = false;
-        });
+
       }
     } on PlatformException catch (e) {
       log('PlatformException in postRestCall --> ${e.message}');
-      postAdDetailsPageState.setState(() {
-        status = false;
-      });
+      status = false;
+      postAdDetailsPageState.setState(() {});
     }
     return null;
   }

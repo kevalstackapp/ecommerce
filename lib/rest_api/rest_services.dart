@@ -22,6 +22,8 @@ class RestServices {
   static String postAdDetailApi = "$baseUrl/api/v1/detail/AddOrUpdateAd2";
   static String postAdDetailGetDataApi = "/api/v1/detail/getmyadds";
   static String broadCastApi = "/api/v1/detail/getbroadcastdetailnew?broadCastId=";
+  static String deleteByAdmin = '/api/v1/detail/DeleteAdByAdmin?addDetailId=';
+  static String getFilterAdsApi = '/api/v1/detail/getfilteredadds';
 
 
   static Map<String, String> headers = {'Content-Type': 'application/json'};

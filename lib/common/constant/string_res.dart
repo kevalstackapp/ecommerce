@@ -213,6 +213,8 @@ your listing.""";
   static const postDetail = """Send people directly to your website for only 
 \$0.99. Go for it""";
   static const similarAds = 'Similar Ads';
+  static const edit = 'Edit';
+  static const delete = 'Delete';
 
 
 }

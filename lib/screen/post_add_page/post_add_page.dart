@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:ecommerce/common/constant/color_res.dart';
 import 'package:ecommerce/common/constant/image_res.dart';
 import 'package:ecommerce/common/constant/string_res.dart';
-import 'package:ecommerce/common/widget/app_video_player.dart';
 import 'package:ecommerce/common/widget/common_navigator.dart';
 import 'package:ecommerce/common/widget/common_text.dart';
 import 'package:ecommerce/common/widget/elevated_button.dart';
@@ -17,7 +16,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
 
 class PostAddPage extends StatefulWidget {
-  const PostAddPage({Key? key}) : super(key: key);
+  const PostAddPage( {Key? key}) : super(key: key);
 
   @override
   State<PostAddPage> createState() => PostAddPageState();
@@ -160,12 +159,12 @@ class PostAddPageState extends State<PostAddPage> {
                                                   snapshot.hasData) {
                                                 return InkWell(
                                                   onTap: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        CommonNavigator(
-                                                            child: AppVideoPlayer(
-                                                                videoPath[
-                                                                    index])));
+                                                    // Navigator.push(
+                                                    //     context,
+                                                    //     CommonNavigator(
+                                                    //         child: AppVideoPlayer(
+                                                    //             videoPath[
+                                                    //                 index])));
                                                   },
                                                   child: Container(
                                                       height: 109,
@@ -391,3 +390,4 @@ class PostAddPageState extends State<PostAddPage> {
     );
   }
 }
+

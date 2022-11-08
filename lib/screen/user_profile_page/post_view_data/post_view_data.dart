@@ -1,13 +1,16 @@
 import 'package:ecommerce/common/constant/color_res.dart';
 import 'package:ecommerce/common/constant/image_res.dart';
 import 'package:ecommerce/common/constant/string_res.dart';
+import 'package:ecommerce/common/widget/app_video_player.dart';
 import 'package:ecommerce/common/widget/common_navigator.dart';
 import 'package:ecommerce/common/widget/common_text.dart';
 import 'package:ecommerce/model/get_post_ad_data_model.dart' as model;
 import 'package:ecommerce/screen/navigator_all_page/navigator_all_page.dart';
+import 'package:ecommerce/screen/post_add_page/post_add_page.dart';
 import 'package:ecommerce/screen/user_profile_page/post_view_data/post_view_data_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class PostViewData extends StatefulWidget {
   model.FilteredAddList? showData;
@@ -20,6 +23,10 @@ class PostViewData extends StatefulWidget {
 
 class PostViewDataState extends State<PostViewData> {
   PostViewDataViewModel? postViewDataViewModel;
+
+
+  int clickImage = 0;
+  PageController pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,35 +46,66 @@ class PostViewDataState extends State<PostViewData> {
                         children: [
                           Stack(
                             children: [
-                              Container(
-                                height: 200,
-                                width: double.infinity,
-                                color: ColorResource.green,
-                                child: Align(
-                                  alignment: Alignment.topRight,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        height: 35,
-                                        width: 35,
-                                        decoration: const BoxDecoration(
-                                            color: Colors.grey,
-                                            shape: BoxShape.circle),
-                                        child: IconButton(
-                                          onPressed: () {},
-                                          icon: const Icon(Icons.share,
-                                              color: ColorResource.white,
-                                              size: 15),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 10),
-                                        child: Container(
+                              Stack(
+                                children: [
+                                  Container(
+                                    height: 200,
+                                    width: double.infinity,
+                                    color: ColorResource.green,
+                                    child: PageView.builder(
+                                      onPageChanged: (value) {
+                                        clickImage = value;
+                                      },
+                                      controller: pageController,
+                                      itemCount: postViewDataViewModel!
+                                          .allVideoAndImage.length,
+                                      itemBuilder: (context, index) {
+                                        return SizedBox(
+                                            height: 250,
+                                            width: double.infinity,
+                                            child: postViewDataViewModel!
+                                                    .allVideoAndImage[index]
+                                                    .containsKey('video')
+                                                ? Container(
+                                                    decoration: BoxDecoration(
+                                                        image: DecorationImage(
+                                                            image: NetworkImage(
+                                                                postViewDataViewModel!
+                                                                            .allVideoAndImage[
+                                                                        index]
+                                                                    ["video"]),
+                                                            fit: BoxFit.fill)),
+                                                    child: IconButton(
+                                                        onPressed: () {
+                                                          Navigator.push(
+                                                              context,
+                                                              CommonNavigator(
+                                                                  child:
+                                                                      AppVideoPlayer("${postViewDataViewModel!.broadCastModel!.adVideo![index].video}")));
+                                                        },
+                                                        icon: const Icon(size: 30,
+                                                          Icons.play_circle,
+                                                          color: ColorResource
+                                                              .white,
+                                                        )),
+                                                  )
+                                                : Image.network(
+                                                    postViewDataViewModel!
+                                                            .allVideoAndImage[
+                                                        index]["image"],
+                                                    width: double.infinity,
+                                                    height: double.infinity,
+                                                    fit: BoxFit.fill,
+                                                  ));
+                                      },
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.topRight,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Container(
                                           height: 35,
                                           width: 35,
                                           decoration: const BoxDecoration(
@@ -75,15 +113,87 @@ class PostViewDataState extends State<PostViewData> {
                                               shape: BoxShape.circle),
                                           child: IconButton(
                                             onPressed: () {},
-                                            icon: const Icon(Icons.more_horiz,
+                                            icon: const Icon(Icons.share,
                                                 color: ColorResource.white,
-                                                size: 20),
+                                                size: 15),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 10),
+                                          child: Container(
+                                              height: 35,
+                                              width: 35,
+                                              decoration: const BoxDecoration(
+                                                  color: Colors.grey,
+                                                  shape: BoxShape.circle),
+                                              child: PopupMenuButton(
+                                                shape: const RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    15),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    15),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    15))),
+                                                position:
+                                                    PopupMenuPosition.under,
+                                                offset: const Offset(-3, 8),
+                                                child: const Icon(
+                                                    Icons.more_horiz,
+                                                    color: ColorResource.white,
+                                                    size: 20),
+                                                onSelected: (value) {
+                                                  if (value == 1) {
+                                                    Navigator.pushReplacement(context, CommonNavigator(child:  const PostAddPage()));
+
+                                                  } else if (value == 2) {
+                                                    postViewDataViewModel!
+                                                        .deleteByAdminMethod();
+                                                  }
+                                                },
+                                                itemBuilder: (BuildContext bc) {
+                                                  return const [
+                                                    PopupMenuItem(
+                                                      value: 1,
+                                                      child: Text(
+                                                          StringResources.edit),
+                                                    ),
+                                                    PopupMenuItem(
+                                                      value: 2,
+                                                      child: Text(
+                                                          StringResources
+                                                              .delete),
+                                                    ),
+                                                  ];
+                                                },
+                                              )),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
+                                  Align(
+                                    alignment: Alignment.center,
+                                    heightFactor: 27,
+                                    child: SmoothPageIndicator(
+                                        controller: pageController,
+                                        count: postViewDataViewModel!
+                                            .allVideoAndImage.length,
+                                        effect: const WormEffect(
+                                            activeDotColor: ColorResource.white,
+                                            radius: 30,
+                                            dotWidth: 12,
+                                            dotHeight: 12),
+                                        onDotClicked: (index) {}),
+                                  )
+                                ],
                               ),
                               Container(
                                 margin: const EdgeInsets.only(top: 170),
@@ -176,21 +286,40 @@ class PostViewDataState extends State<PostViewData> {
                                                 scrollDirection:
                                                     Axis.horizontal,
                                                 itemCount:
-                                                    getData.adImage!.length,
+                                                    postViewDataViewModel!
+                                                        .allVideoAndImage
+                                                        .length,
                                                 itemBuilder: (context, index) {
-                                                  return Container(
-                                                    height: 50,
-                                                    width: 75,
-                                                    decoration: BoxDecoration(
-                                                        color: Colors.grey,
-                                                        borderRadius:
-                                                            const BorderRadius.all(
-                                                                Radius.circular(
-                                                                    5)),
-                                                        image: DecorationImage(
-                                                            image: NetworkImage(
-                                                                "${getData.adImage![index].image}"),
-                                                            fit: BoxFit.fill)),
+                                                  return InkWell(
+                                                    onTap: () {
+                                                      var clickImage = index;
+                                                      pageController.jumpToPage(
+                                                          clickImage);
+                                                    },
+                                                    child: Container(
+                                                      height: 50,
+                                                      width: 75,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.grey,
+                                                          borderRadius:
+                                                              const BorderRadius.all(
+                                                                  Radius.circular(
+                                                                      5)),
+                                                          image: postViewDataViewModel!
+                                                                  .allVideoAndImage[
+                                                                      index]
+                                                                  .containsKey(
+                                                                      'image')
+                                                              ? DecorationImage(
+                                                                  image: NetworkImage(
+                                                                      "${postViewDataViewModel!.allVideoAndImage[index]["image"]}"),
+                                                                  fit: BoxFit
+                                                                      .fill)
+                                                              : DecorationImage(
+                                                                  image:
+                                                                      NetworkImage("${postViewDataViewModel!.allVideoAndImage[index]["video"]}"),
+                                                                  fit: BoxFit.fill)),
+                                                    ),
                                                   );
                                                 },
                                               ),
@@ -272,7 +401,120 @@ class PostViewDataState extends State<PostViewData> {
                                         ),
                                       ],
                                     ),
-                                    Image.asset(ImageResources.similarAdsImg),
+
+                                    ListView.builder(
+                                      shrinkWrap: true,
+                                      physics: const ClampingScrollPhysics(),
+                                      itemCount: 3,
+                                      itemBuilder: (context, index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 15, right: 15, top: 10),
+                                          child: Card(
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  height: 100,
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.grey,
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                                  .all(
+                                                              Radius.circular(
+                                                                  5)),
+                                                      image: DecorationImage(
+                                                          image: NetworkImage(
+                                                              "${getData.similarAddList![index].adImageThumb}"),
+                                                          fit: BoxFit.fill)),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5),
+                                                  child: Row(
+                                                    children: [
+                                                      Column(
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 10),
+                                                            child: CommonText(
+                                                              text:
+                                                                  "${getData.similarAddList![index].title}",
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              color:
+                                                                  ColorResource
+                                                                      .black,
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                            height: 5,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 10),
+                                                            child: CommonText(
+                                                              text:
+                                                                  "\$${getData.similarAddList![index].amount}",
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              color:
+                                                                  ColorResource
+                                                                      .green,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      const Spacer(),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                          right: 10,
+                                                        ),
+                                                        child: Container(
+                                                          height: 27,
+                                                          alignment:
+                                                              Alignment.center,
+                                                          decoration: BoxDecoration(
+                                                              color: Colors.grey
+                                                                  .shade400,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          6)),
+                                                          child: Container(
+                                                              alignment:
+                                                                  Alignment
+                                                                      .center,
+                                                              width: 90,
+                                                              child: SvgPicture
+                                                                  .asset(
+                                                                ImageResources
+                                                                    .share,
+                                                                height: 40,
+                                                              )),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    //Image.asset(ImageResources.similarAdsImg),
                                   ],
                                 ),
                               ),
@@ -329,3 +571,5 @@ class PostViewDataState extends State<PostViewData> {
         ));
   }
 }
+
+

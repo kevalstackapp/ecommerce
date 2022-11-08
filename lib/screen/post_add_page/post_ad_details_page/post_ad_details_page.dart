@@ -1,9 +1,7 @@
-import 'package:ecommerce/common/app/shred_preference.dart';
 import 'package:ecommerce/common/constant/color_res.dart';
 import 'package:ecommerce/common/constant/string_res.dart';
 import 'package:ecommerce/common/widget/common_text.dart';
 import 'package:ecommerce/common/widget/elevated_button.dart';
-import 'package:ecommerce/common/widget/snack_bar_widget.dart';
 import 'package:ecommerce/screen/post_add_page/post_ad_details_page/post_ad_detail_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,7 +14,7 @@ class PostAdDetailsPage extends StatefulWidget {
   List<XFile> imgPath;
   List<String> videoPath;
 
-  PostAdDetailsPage(this.imgPath, this.videoPath);
+  PostAdDetailsPage(this.imgPath, this.videoPath, {super.key});
 
   @override
   State<PostAdDetailsPage> createState() => PostAdDetailsPageState();

@@ -44,14 +44,14 @@ class _NavigatorAllPageState extends State<NavigatorAllPage> {
         key: scaffoldKey,
         resizeToAvoidBottomInset: false,
         drawerEnableOpenDragGesture: true,
-        drawer: draweropen(context),
+        drawer: drawerOpen(context),
         body: widgetLst[_bottomNavIndex],
         floatingActionButton: FloatingActionButton(
           splashColor: ColorResource.green,
           hoverColor: ColorResource.red,
           onPressed: () {
             Navigator.push(
-                context, CommonNavigator(child: const PostAddPage()));
+                context, CommonNavigator(child:  PostAddPage()));
           },
           backgroundColor: ColorResource.green,
           child: const Icon(
